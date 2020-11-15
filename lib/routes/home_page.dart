@@ -22,10 +22,18 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         actions: [
-          Icon(
-            Icons.search,
-            size: 32.px,
-            color: Colors.white,
+          Padding(
+            padding: EdgeInsets.only(right: 16),
+            child: GestureDetector(
+              child: Icon(
+                Icons.search,
+                size: 32.px,
+                color: Colors.white,
+              ),
+              onTap: (){
+                print('tap');
+              },
+            ),
           ),
         ],
       ),

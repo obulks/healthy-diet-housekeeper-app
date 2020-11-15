@@ -1,9 +1,12 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/services.dart';
 import 'package:healthy_diet_housekeeper/common/size_fit.dart';
-import '../common/double_extension.dart';
-import '../common/int_extension.dart';
 import '../common/size_fit.dart';
+import '../common/int_extension.dart';
+import '../common/double_extension.dart';
+import '../widgets/login_form_authcode_button.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -18,6 +21,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     SizeFit.initialize(context);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark));
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -34,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
                     '手机号登录/注册',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 19,
+                      fontSize: 19.px,
                     ),
                   ),
                 ),
@@ -46,6 +53,7 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               padding: EdgeInsets.only(left: 48.px),
               child: Form(
+                key: _formKey,
                 child: Column(
                   children: [
                     Container(
@@ -96,45 +104,16 @@ class _LoginPageState extends State<LoginPage> {
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Color(0xffCCCCCC)),
                           ),
-                          suffixIcon: Container(
-                            width: 80.px,
-                            height: 30.px,
-                            // padding: EdgeInsets.only(
-                            //   top: 8.px,
-                            //   bottom: 8.px,
-                            // ),
-                            padding: EdgeInsets.symmetric(vertical: 8),
-
-                            child: OutlineButton(
-                              padding: EdgeInsets.all(0),
-                              child: Text(
-                                '获取验证码',
-                                style: TextStyle(
-                                    fontSize: 11.px,
-                                    color: Theme.of(context).primaryColor),
-                              ),
-                              borderSide: BorderSide(
-                                color: Theme.of(context).primaryColor,
-                                style: BorderStyle.solid,
-                                width: 1,
-                              ),
-                              splashColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              highlightedBorderColor:
-                                  Theme.of(context).primaryColor,
-                              shape: RoundedRectangleBorder(
-                                //圆角属性
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              onPressed: () {
-                                print('send sms');
-                              },
-                            ),
+                          suffixIcon: LoginFormAuthCodeButton(
+                            onTapCallback: () {
+                              // 点击获取验证码后要执行的回调
+                              print('tap');
+                            },
                           ),
                         ),
                         // 校验用户名
                         validator: (v) {
-                          return v.trim().length > 0 ? null : "用户名不能为空";
+                          return v.trim().length > 0 ? null : "手机号码不能为空";
                         },
                       ),
                     ),
@@ -181,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                onPressed: (){
+                onPressed: () {
                   Navigator.pushNamed(context, '/');
                 },
               ),

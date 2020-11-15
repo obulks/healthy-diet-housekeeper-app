@@ -146,6 +146,7 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
   }
 }
 
+// 实现FloatingActionButton位置定位到TabBar中
 class _CenterDockedFloatingActionButtonLocation
     extends _DockedFloatingActionButtonLocation {
   const _CenterDockedFloatingActionButtonLocation();
