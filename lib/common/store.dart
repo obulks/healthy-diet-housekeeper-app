@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class LocalStore extends ChangeNotifier {
+class Store extends ChangeNotifier {
   int _count = 0;
 
   get count => _count;

@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import './routes/app_home_screen.dart';
 import './routes/home_page.dart';
@@ -14,11 +17,19 @@ void main() {
     /// can use [MyApp] while mocking the providers
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => LocalStore()),
+        ChangeNotifierProvider(create: (_) => Store()),
       ],
       child: App(),
     ),
   );
+  if(Platform.isAndroid){
+    SystemUiOverlayStyle style = SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        //设置状态栏的图标和字体的颜色
+        statusBarIconBrightness: Brightness.light,
+    );
+    SystemChrome.setSystemUIOverlayStyle(style);
+  }
 }
 
 class App extends StatelessWidget {
@@ -46,6 +57,3 @@ class App extends StatelessWidget {
     );
   }
 }
-
-
-
