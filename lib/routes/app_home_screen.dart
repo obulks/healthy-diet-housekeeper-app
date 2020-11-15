@@ -75,8 +75,8 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    initData();
     SizeFit.initialize(context);
+    initData();
     return Scaffold(
       body: _pageList[_tabIndex],
       bottomNavigationBar: new BottomNavigationBar(
