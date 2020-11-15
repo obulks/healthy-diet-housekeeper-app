@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_diet_housekeeper/routes/login_page.dart';
 import 'package:provider/provider.dart';
-import './common/global.dart';
+import './routes/app_home_screen.dart';
 import './routes/home_page.dart';
+import './routes/food_page.dart';
+import './routes/my_page.dart';
+import './routes/find_page.dart';
 import './routes/login_page.dart';
+import './common/store.dart';
 
 void main() {
   runApp(
@@ -11,25 +14,38 @@ void main() {
     /// can use [MyApp] while mocking the providers
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => LocaleModel()),
+        ChangeNotifierProvider(create: (_) => LocalStore()),
       ],
-      child: MyApp(),
+      child: App(),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '健康饮食管家',
-      initialRoute: '/login',
+      debugShowCheckedModeBanner:false,
+      title: 'AppTitle',
+      theme: ThemeData(
+        primaryColor: Color(0xff3fdabf),
+        backgroundColor: Color(0xffF7F8F9),
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+      ),
+      // initialRoute: '/login',
+      initialRoute: '/',
       routes: {
-        '/': (context) => HomePage(),
+        '/': (context) => AppHomeScreen(),
+        '/home': (context) => HomePage(),
         '/login': (context) => LoginPage(),
-
+        '/food': (context) => FoodPage(),
+        '/find': (context) => FindPage(),
+        '/my': (context) => MyPage(),
       },
     );
   }
 }
+
+
 
