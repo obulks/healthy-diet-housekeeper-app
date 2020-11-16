@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/*
+该类用来全局屏幕适配
+ */
 class SizeFit {
   static MediaQueryData _mediaQueryData;
   static double screenWidth;
@@ -25,4 +28,3 @@ class SizeFit {
     return SizeFit.rpx * size;
   }
 }
-

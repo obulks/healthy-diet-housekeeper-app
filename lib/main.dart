@@ -44,7 +44,7 @@ class App extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
       ),
-      initialRoute: '/login',
+      initialRoute: '/',
       // initialRoute: '/',
       routes: {
         '/': (context) => AppHomeScreen(),

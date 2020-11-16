@@ -49,14 +49,14 @@ class _LoginFormAuthCodeButtonState extends State<LoginFormAuthCodeButton> {
             (Timer timer) => {
           setState(() {
             if (_seconds <= 0) {
-              _verifyStr = '重新获取';
+              _verifyStr = '获取验证码';
               _timer.cancel();
               _seconds = 60;
               _currentColor = _availableColor;
               _currentWidth = _availableWidth;
             } else {
               _seconds -= 1;
-              _verifyStr = '${_seconds}s';
+              _verifyStr = '$_seconds秒';
               _currentColor = _unavailableColor;
               _currentWidth = _unavailableWidth;
             }
