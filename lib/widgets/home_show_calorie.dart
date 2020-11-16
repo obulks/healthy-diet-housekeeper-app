@@ -13,9 +13,9 @@ class ShowCalorie extends StatefulWidget {
   ShowCalorie({
     this.text,
     this.animationDuration = 1000,
-    this.animation = true,
-    this.lowerBound,
-    this.upperBound,
+    this.animation = false,
+    this.lowerBound = 0,
+    @required this.upperBound,
   });
   @override
   _ShowCalorieState createState() => _ShowCalorieState();

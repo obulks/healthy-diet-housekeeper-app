@@ -39,6 +39,8 @@ class ShowMacronutrient extends StatelessWidget {
           LinearPercentIndicator(
             width: 80.px,
             lineHeight: 4.px,
+            animation: true,
+            animationDuration: 800,
             percent: percent,
             backgroundColor: backgroundColor,
             progressColor: progressColor,

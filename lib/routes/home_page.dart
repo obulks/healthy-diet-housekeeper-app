@@ -3,8 +3,9 @@ import 'package:percent_indicator/percent_indicator.dart';
 import '../common/size_fit.dart';
 import '../common/int_extension.dart';
 import '../common/double_extension.dart';
-import '../widgets/show_macronutrient.dart';
-import '../widgets/show_calorie.dart';
+import '../widgets/home_show_macronutrient.dart';
+import '../widgets/home_show_calorie.dart';
+import '../widgets/home_record_food_button.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,9 +13,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var buttonIcons;
+
+  void initData() {
+    buttonIcons = [
+      Image.asset('assets/icons/breakfast.png', width: 32.px, height: 32.px),
+      Image.asset('assets/icons/lunch.png', width: 32.px, height: 32.px),
+      Image.asset('assets/icons/dinner.png', width: 32.px, height: 32.px),
+      Image.asset('assets/icons/snack.png', width: 32.px, height: 32.px),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeFit.initialize(context);
+    initData();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -24,21 +37,21 @@ class _HomePageState extends State<HomePage> {
             fontSize: 19.px,
           ),
         ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 16),
-            child: GestureDetector(
-              child: Icon(
-                Icons.search,
-                size: 32.px,
-                color: Colors.white,
-              ),
-              onTap: () {
-                print('tap');
-              },
-            ),
-          ),
-        ],
+        // actions: [
+        //   Padding(
+        //     padding: EdgeInsets.only(right: 16),
+        //     child: GestureDetector(
+        //       child: Icon(
+        //         Icons.search,
+        //         size: 32.px,
+        //         color: Colors.white,
+        //       ),
+        //       onTap: () {
+        //         print('tap');
+        //       },
+        //     ),
+        //   ),
+        // ],
       ),
       body: Container(
         color: Color(0xffF7F8F9),
@@ -143,6 +156,38 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+            ),
+            SizedBox(
+              height: 20.px,
+            ),
+            RecordFoodButton(
+              icon: buttonIcons[0],
+              title: '早餐',
+              subTitle: '建议不超过432千卡',
+              onTap: () {
+                print('tap');
+              },
+            ),RecordFoodButton(
+              icon: buttonIcons[1],
+              title: '午餐',
+              subTitle: '建议不超过432千卡',
+              onTap: () {
+                print('tap');
+              },
+            ),RecordFoodButton(
+              icon: buttonIcons[2],
+              title: '晚餐',
+              subTitle: '建议不超过432千卡',
+              onTap: () {
+                print('tap');
+              },
+            ),RecordFoodButton(
+              icon: buttonIcons[3],
+              title: '加餐',
+              subTitle: '建议不超过432千卡',
+              onTap: () {
+                print('tap');
+              },
             ),
           ],
         ),
