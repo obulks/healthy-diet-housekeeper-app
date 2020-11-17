@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
       Image.asset('assets/icons/breakfast.png', width: 32.px, height: 32.px),
       Image.asset('assets/icons/lunch.png', width: 32.px, height: 32.px),
       Image.asset('assets/icons/dinner.png', width: 32.px, height: 32.px),
-      Image.asset('assets/icons/snack.png', width: 32.px, height: 32.px),
+      Image.asset('assets/icons/snack2.png', width: 32.px, height: 32.px),
     ];
   }
 
@@ -165,28 +165,28 @@ class _HomePageState extends State<HomePage> {
               title: '早餐',
               subTitle: '建议不超过432千卡',
               onTap: () {
-                print('tap');
+                print('早餐');
               },
             ),RecordFoodButton(
               icon: buttonIcons[1],
               title: '午餐',
               subTitle: '建议不超过432千卡',
               onTap: () {
-                print('tap');
+                print('午餐');
               },
             ),RecordFoodButton(
               icon: buttonIcons[2],
               title: '晚餐',
               subTitle: '建议不超过432千卡',
               onTap: () {
-                print('tap');
+                print('晚餐');
               },
             ),RecordFoodButton(
               icon: buttonIcons[3],
               title: '加餐',
               subTitle: '建议不超过432千卡',
               onTap: () {
-                print('tap');
+                print('加餐');
               },
             ),
           ],
