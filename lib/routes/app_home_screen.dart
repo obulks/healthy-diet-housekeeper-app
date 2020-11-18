@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:healthy_diet_housekeeper/routes/find_page.dart';
 import 'package:healthy_diet_housekeeper/routes/food_page.dart';
 import 'package:healthy_diet_housekeeper/routes/home_page.dart';
-import 'package:healthy_diet_housekeeper/routes/my_page.dart';
+import 'package:healthy_diet_housekeeper/routes/me_page.dart';
 import 'package:healthy_diet_housekeeper/widgets/bottom_sheet_content.dart';
 import '../common/size_fit.dart';
 import '../common/int_extension.dart';

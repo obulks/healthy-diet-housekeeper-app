@@ -35,9 +35,7 @@ class _FoodPageState extends State<FoodPage> {
             onPressed: () {
               showSearch(
                 context: context,
-                delegate: CustomSearchDelegate(
-
-                ),
+                delegate: CustomSearchDelegate(),
               );
             },
           ),
@@ -48,48 +46,6 @@ class _FoodPageState extends State<FoodPage> {
           child: Column(
             children: <Widget>[
               FoodGroupPanel(),
-              Container(
-                child: Text(
-                  '食物分类',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-              Container(
-                height: 480.px,
-                padding: EdgeInsets.only(
-                  top: 24.px,
-                  left: 24.px,
-                  right: 24.px,
-                ),
-                child: GridView.count(
-                  // scrollDirection: Axis.vertical,
-                  physics: NeverScrollableScrollPhysics(),
-                  crossAxisCount: 4,
-                  crossAxisSpacing: 16.px,
-                  mainAxisSpacing: 16.px,
-                  children: List.generate(18, (index) {
-                    return Container(
-                      // width: 56.px,
-                      alignment: Alignment(0, 0),
-                      child: Text(
-                        '零食饮料',
-                        style: TextStyle(
-                            fontSize: 13.px, color: Color(0xff222222)),
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8.px),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Color(0xffcccccc),
-                            offset: Offset(0, 1),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-                ),
-              )
             ],
           ),
         ),
