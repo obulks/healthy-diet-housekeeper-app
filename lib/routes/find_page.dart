@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import '../common/size_fit.dart';
-import '../common/int_extension.dart';
-import '../common/double_extension.dart';
-import './find_recommend_page.dart';
+import 'package:healthy_diet_housekeeper/public.dart';
 
 class FindPage extends StatefulWidget {
   @override

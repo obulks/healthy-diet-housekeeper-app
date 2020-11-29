@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/percent_indicator.dart';
-import '../common/size_fit.dart';
-import '../common/int_extension.dart';
-import '../common/double_extension.dart';
+import 'package:healthy_diet_housekeeper/public.dart';
 
 class ShowMacronutrient extends StatelessWidget {
   final String text;

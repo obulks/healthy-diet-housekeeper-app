@@ -1,16 +1,6 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import './routes/app_home_screen.dart';
-import './routes/home_page.dart';
-import './routes/food_page.dart';
-import './routes/me_page.dart';
-import './routes/find_page.dart';
-import './routes/login_page.dart';
-import './common/store.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
-
+import 'package:healthy_diet_housekeeper/public.dart';
+// import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() {
   runApp(

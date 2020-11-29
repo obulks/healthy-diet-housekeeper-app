@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/percent_indicator.dart';
-import '../common/size_fit.dart';
-import '../common/int_extension.dart';
-import '../common/double_extension.dart';
-import '../widgets/home_show_macronutrient.dart';
-import '../widgets/home_show_calorie.dart';
-import '../widgets/home_record_food_button.dart';
+import 'package:healthy_diet_housekeeper/public.dart';
 
 class HomePage extends StatefulWidget {
   @override

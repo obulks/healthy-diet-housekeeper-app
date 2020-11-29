@@ -1,12 +1,5 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/services.dart';
-import 'package:healthy_diet_housekeeper/common/size_fit.dart';
-import '../common/size_fit.dart';
-import '../common/int_extension.dart';
-import '../common/double_extension.dart';
-import '../widgets/login_form_authcode_button.dart';
+import 'package:healthy_diet_housekeeper/public.dart';
 
 class LoginPage extends StatefulWidget {
   @override

@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_diet_housekeeper/common/store.dart';
-import 'package:healthy_diet_housekeeper/widgets/food_group_panel.dart';
-import 'package:provider/provider.dart';
-import '../common/size_fit.dart';
-import '../common/int_extension.dart';
-import '../common/double_extension.dart';
-import '../widgets/food_custom_search_delegate.dart';
+import 'package:healthy_diet_housekeeper/public.dart';
 
 class FoodPage extends StatefulWidget {
   @override
