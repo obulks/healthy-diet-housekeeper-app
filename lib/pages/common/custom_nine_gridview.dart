@@ -18,7 +18,7 @@ class _CustomNineGridView extends StatelessWidget {
       itemCount: urlList.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
-          child: NetworkImageLoader(
+          child: LoadNetworkImage(
             url: urlList[index],
             borderRadiusSize: 4.px,
           ),

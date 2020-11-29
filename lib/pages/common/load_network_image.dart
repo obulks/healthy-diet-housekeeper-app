@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_diet_housekeeper/public.dart';
 
-class NetworkImageLoader extends StatelessWidget {
+class LoadNetworkImage extends StatelessWidget {
   final String url;
   final double borderRadiusSize;
+  final Widget placeholder;
+  final Widget errorWidget;
 
-  const NetworkImageLoader({this.url, this.borderRadiusSize});
+  const LoadNetworkImage({
+    this.url,
+    this.borderRadiusSize,
+    this.placeholder,
+    this.errorWidget,
+  });
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
@@ -19,6 +26,13 @@ class NetworkImageLoader extends StatelessWidget {
           ),
         ),
       ),
+      placeholder: (context, url) =>
+          placeholder ??
+          SpinKitFadingCircle(
+            color: Theme.of(context).primaryColor,
+            size: 30.px,
+          ),
+      errorWidget: (context, url, error) => errorWidget ?? Icon(Icons.error),
     );
   }
 }

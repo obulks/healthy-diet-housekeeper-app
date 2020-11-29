@@ -13,14 +13,14 @@ void main() {
   );
 
   if (Platform.isAndroid) {
-    SystemUiOverlayStyle style = SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      //设置状态栏的图标和字体的颜色
-      statusBarIconBrightness: Brightness.light,
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        //设置状态栏的图标和字体的颜色
+        statusBarIconBrightness: Brightness.light,
+      ),
     );
-    SystemChrome.setSystemUIOverlayStyle(style);
   }
-
 }
 
 class App extends StatelessWidget {

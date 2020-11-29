@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_diet_housekeeper/public.dart';
 
-
-
 class MyPage extends StatefulWidget {
   @override
   _MyPageState createState() => _MyPageState();

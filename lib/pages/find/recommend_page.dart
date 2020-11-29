@@ -1,13 +1,5 @@
-import 'dart:async';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:healthy_diet_housekeeper/widgets/network_image_loader.dart';
-import '../common/size_fit.dart';
-import '../common/int_extension.dart';
-import '../common/double_extension.dart';
-
-import 'package:nine_grid_view/nine_grid_view.dart';
+import 'package:healthy_diet_housekeeper/public.dart';
 
 class RecommendPage extends StatefulWidget {
   @override
@@ -134,25 +126,11 @@ class _ItemCard extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  child: CachedNetworkImage(
-                    imageUrl:
-                        'http://i1.hdslb.com/bfs/face/681d4084f2e7e423fa188339c51a438c2eae59b2.jpg',
-                    imageBuilder: (context, imageProvider) => Container(
-                      width: 40.px,
-                      height: 40.px,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.px),
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    placeholder: (context, url) => SpinKitFadingCircle(
-                      color: Theme.of(context).primaryColor,
-                      size: 30.px,
-                    ),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  width: 40.px,
+                  height: 40.px,
+                  child: LoadNetworkImage(
+                    url: 'http://i1.hdslb.com/bfs/face/681d4084f2e7e423fa188339c51a438c2eae59b2.jpg',
+                      borderRadiusSize: 20.px,
                   ),
                 ),
                 Container(

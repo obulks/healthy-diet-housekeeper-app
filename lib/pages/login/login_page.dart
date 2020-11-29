@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Color(0xffCCCCCC)),
                           ),
-                          suffixIcon: LoginFormAuthCodeButton(
+                          suffixIcon: AuthCodeButton(
                             onTapCallback: () {
                               // 点击获取验证码后要执行的回调
                               print('get auth code');

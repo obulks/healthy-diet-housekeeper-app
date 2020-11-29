@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_diet_housekeeper/public.dart';
 
-class LoginFormAuthCodeButton extends StatefulWidget {
+class AuthCodeButton extends StatefulWidget {
   /// 倒计时的秒数，默认60秒。
   final int countdown;
 
   /// 用户点击时的回调函数。
   final Function onTapCallback;
 
-  LoginFormAuthCodeButton({
+  AuthCodeButton({
     this.countdown: 60,
     this.onTapCallback,
   });
 
   @override
-  _LoginFormAuthCodeButtonState createState() => _LoginFormAuthCodeButtonState();
+  _AuthCodeButtonState createState() => _AuthCodeButtonState();
 }
 
-class _LoginFormAuthCodeButtonState extends State<LoginFormAuthCodeButton> {
+class _AuthCodeButtonState extends State<AuthCodeButton> {
   Color _availableColor = Color(0xff3fdabf);
   Color _unavailableColor = Color(0xffA6ADBE);
   double _availableWidth = 80.px;
