@@ -43,6 +43,14 @@ class _LoginFormAuthCodeButtonState extends State<LoginFormAuthCodeButton> {
     _seconds = widget.countdown;
   }
 
+  @override
+  void dispose() {
+    if(_timer != null) {
+      _timer.cancel();
+    }
+    super.dispose();
+  }
+
   void _startTimer() {
     _timer = Timer.periodic(
         Duration(seconds: 1),

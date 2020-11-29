@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -10,11 +9,11 @@ import './routes/me_page.dart';
 import './routes/find_page.dart';
 import './routes/login_page.dart';
 import './common/store.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 
 void main() {
   runApp(
-    /// Providers are above [MyApp] instead of inside it, so that tests
-    /// can use [MyApp] while mocking the providers
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => Store()),
@@ -22,6 +21,7 @@ void main() {
       child: App(),
     ),
   );
+
   if (Platform.isAndroid) {
     SystemUiOverlayStyle style = SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -30,6 +30,7 @@ void main() {
     );
     SystemChrome.setSystemUIOverlayStyle(style);
   }
+
 }
 
 class App extends StatelessWidget {

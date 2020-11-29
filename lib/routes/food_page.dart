@@ -42,6 +42,7 @@ class _FoodPageState extends State<FoodPage> {
         ],
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Container(
           child: Column(
             children: <Widget>[

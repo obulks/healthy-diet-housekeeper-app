@@ -9,6 +9,7 @@ import '../common/int_extension.dart';
 import '../common/double_extension.dart';
 import 'dart:math' as math;
 
+
 class AppHomeScreen extends StatefulWidget {
   @override
   _AppHomeScreenState createState() => _AppHomeScreenState();
@@ -16,29 +17,31 @@ class AppHomeScreen extends StatefulWidget {
 
 class _AppHomeScreenState extends State<AppHomeScreen> {
   int _tabIndex = 0;
-  var tabImages;
-  var appBarTitles = ['首页', '食材', '', '发现', '我的'];
+  var _tabImages;
+  var _appBarTitles = ['首页', '食材', '', '发现', '我的'];
   var _pageList;
   final _bottomSheetScaffoldKey = GlobalKey<ScaffoldState>();
+  final _bottomNavigationBarKey = GlobalKey();
   /*
    * 根据选择获得对应的normal或是press的img
    */
+
   Image getTabIcon(int curIndex) {
     if (curIndex == _tabIndex) {
-      return tabImages[curIndex][1];
+      return _tabImages[curIndex][1];
     }
-    return tabImages[curIndex][0];
+    return _tabImages[curIndex][0];
   }
 
   /*
    * 根据image路径获取图片
    */
   Image getTabImage(path) {
-    return new Image.asset(path, width: 24.px, height: 24.px);
+    return Image.asset(path, width: 24.px, height: 24.px);
   }
 
   void initData() {
-    tabImages = [
+    _tabImages = [
       [
         getTabImage('assets/icons/tab1.png'),
         getTabImage('assets/icons/tab1s.png'),
@@ -64,11 +67,11 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
      * 5个子界面
      */
     _pageList = [
-      new HomePage(),
-      new FoodPage(),
-      new Container(),
-      new FindPage(),
-      new MyPage(),
+      HomePage(),
+      FoodPage(),
+      Container(),
+      FindPage(),
+      MyPage(),
     ];
   }
 
@@ -76,37 +79,51 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
       _CenterDockedFloatingActionButtonLocation();
 
   @override
+  void initState() {
+    super.initState();
+    // WidgetsBinding.instance.addPostFrameCallback((_) => _buildDoneCallback());
+  }
+
+  // _buildDoneCallback() {
+  // }
+
+  @override
   Widget build(BuildContext context) {
     SizeFit.initialize(context);
     initData();
+    // _bottomNavigationBarHeight = _bottomNavigationBarKey.currentContext.size.height;
     return Scaffold(
       key: _bottomSheetScaffoldKey,
       body: _pageList[_tabIndex],
-      bottomNavigationBar: new BottomNavigationBar(
-        currentIndex: _tabIndex,
-        type: BottomNavigationBarType.fixed,
-        selectedFontSize: 12.px,
-        unselectedFontSize: 12.px,
-        selectedItemColor: Theme.of(context).primaryColor,
-        unselectedItemColor: Color(0xffDCE0E7),
-        items: [
-          new BottomNavigationBarItem(
-              icon: getTabIcon(0), label: '${appBarTitles[0]}'),
-          new BottomNavigationBarItem(
-              icon: getTabIcon(1), label: '${appBarTitles[1]}'),
-          new BottomNavigationBarItem(icon: Icon(Icons.add), label: ''),
-          new BottomNavigationBarItem(
-              icon: getTabIcon(3), label: '${appBarTitles[3]}'),
-          new BottomNavigationBarItem(
-              icon: getTabIcon(4), label: '${appBarTitles[4]}'),
-        ],
-        onTap: (index) {
-          if (index != 2) {
-            setState(() {
-              _tabIndex = index;
-            });
-          }
-        },
+      bottomNavigationBar: SizedBox(
+        height: 56.px,
+        child: BottomNavigationBar(
+          key: _bottomNavigationBarKey,
+          currentIndex: _tabIndex,
+          type: BottomNavigationBarType.fixed,
+          selectedFontSize: 12.px,
+          unselectedFontSize: 12.px,
+          selectedItemColor: Theme.of(context).primaryColor,
+          unselectedItemColor: Color(0xffDCE0E7),
+          items: [
+            BottomNavigationBarItem(
+                icon: getTabIcon(0), label: '${_appBarTitles[0]}'),
+            BottomNavigationBarItem(
+                icon: getTabIcon(1), label: '${_appBarTitles[1]}'),
+            BottomNavigationBarItem(icon: Icon(Icons.add), label: ''),
+            BottomNavigationBarItem(
+                icon: getTabIcon(3), label: '${_appBarTitles[3]}'),
+            BottomNavigationBarItem(
+                icon: getTabIcon(4), label: '${_appBarTitles[4]}'),
+          ],
+          onTap: (index) {
+            if (index != 2) {
+              setState(() {
+                _tabIndex = index;
+              });
+            }
+          },
+        ),
       ),
       floatingActionButton: Container(
         width: 40.px,
@@ -131,7 +148,7 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
       barrierColor: Colors.transparent,
     );
     if (option != null) {
-      switch(option) {
+      switch (option) {
         case 0:
           print('记饮食');
           break;
@@ -158,7 +175,7 @@ class _CenterDockedFloatingActionButtonLocation
         2.0;
     final double fabY = (scaffoldGeometry.scaffoldSize.height -
             scaffoldGeometry.floatingActionButtonSize.height) -
-        7.px;
+        8.px;
     // 返回要设置的坐标
     return Offset(fabX, fabY);
   }

@@ -107,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                           suffixIcon: LoginFormAuthCodeButton(
                             onTapCallback: () {
                               // 点击获取验证码后要执行的回调
-                              print('tap');
+                              print('get auth code');
                             },
                           ),
                         ),
