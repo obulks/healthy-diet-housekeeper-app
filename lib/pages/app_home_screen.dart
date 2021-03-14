@@ -64,7 +64,7 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
       FoodPage(),
       Container(),
       FindPage(),
-      MyPage(),
+      MePage(),
     ];
   }
 

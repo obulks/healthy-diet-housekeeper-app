@@ -16,37 +16,58 @@ class _RecommendPageState extends State<RecommendPage> {
   @override
   Widget build(BuildContext context) {
     SizeFit.initialize(context);
-    return RefreshIndicator(
-      color: Theme.of(context).primaryColor,
-      onRefresh: _refreshData,
-      child: ListView.builder(
-        controller: _scrollController,
-        physics: BouncingScrollPhysics(),
-        itemCount: _dataList.length,
-        itemBuilder: (context, index) {
-          // 如果是最后一个widget，则在后面额外添加一个loading
-          if (index == _dataList.length - 1) {
-            return Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _ItemCard(),
-                  Center(
-                    child: Opacity(
-                      opacity: _loadingFlag ? 0 : 1,
-                      child: SpinKitThreeBounce(
-                        color: Theme.of(context).primaryColor,
-                        size: 24.px,
-                      ),
+    return Scaffold(
+      floatingActionButton: Container(
+        width: 48.px,
+        height: 48.px,
+        child: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor,
+          child: Container(
+            child: Icon(
+              Icons.edit,
+            ),
+          ),
+          onPressed: () {},
+        ),
+      ),
+      body: RefreshIndicator(
+        onRefresh: _refreshData,
+        child: ScrollConfiguration(
+          behavior: ScrollBehavior(),
+          child: GlowingOverscrollIndicator(
+            color: Theme.of(context).primaryColor,
+            axisDirection: AxisDirection.down,
+            child: ListView.builder(
+              controller: _scrollController,
+              physics: ClampingScrollPhysics(),
+              itemCount: _dataList.length,
+              itemBuilder: (context, index) {
+                // 如果是最后一个widget，则在后面额外添加一个loading
+                if (index == _dataList.length - 1) {
+                  return Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        PostCard(),
+                        Center(
+                          child: Opacity(
+                            opacity: _loadingFlag ? 0 : 1,
+                            child: SpinKitThreeBounce(
+                              color: Theme.of(context).primaryColor,
+                              size: 24.px,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-            );
-          } else {
-            return _ItemCard();
-          }
-        },
+                  );
+                } else {
+                  return PostCard();
+                }
+              },
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -54,7 +75,7 @@ class _RecommendPageState extends State<RecommendPage> {
   @override
   void initState() {
     _scrollController = new ScrollController();
-    _dataList = List.generate(30, (i) => i);
+    _dataList = List.generate(5, (i) => i);
 
     _scrollController.addListener(_scrollListener);
     super.initState();
@@ -97,20 +118,21 @@ class _RecommendPageState extends State<RecommendPage> {
     print('下拉刷新');
     await Future.delayed(Duration(milliseconds: 500));
     _dataList.clear();
-    _dataList = List.generate(30, (index) => index + 100);
+    _dataList = List.generate(10, (index) => index + 100);
     setState(() {});
   }
 
   Future<void> _loadingData() async {
     print('上拉加载');
     await Future.delayed(Duration(milliseconds: 500));
-    var newData = List.generate(20, (index) => index + 900);
+    var newData = List.generate(5, (index) => index + 900);
     _dataList.addAll(newData);
     setState(() {});
   }
 }
 
-class _ItemCard extends StatelessWidget {
+/*
+class _PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -129,8 +151,9 @@ class _ItemCard extends StatelessWidget {
                   width: 40.px,
                   height: 40.px,
                   child: LoadNetworkImage(
-                    url: 'http://i1.hdslb.com/bfs/face/681d4084f2e7e423fa188339c51a438c2eae59b2.jpg',
-                      borderRadiusSize: 20.px,
+                    url:
+                        'http://i1.hdslb.com/bfs/face/681d4084f2e7e423fa188339c51a438c2eae59b2.jpg',
+                    borderRadiusSize: 20.px,
                   ),
                 ),
                 Container(
@@ -164,39 +187,25 @@ class _ItemCard extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
+          // Container(
+          //   child: CustomNineGridView(
+          //     urls: [
+          //       'https://gitee.com/obulks/public/raw/master/lobby/beijing_aiai.jpg',
+          //       'https://gitee.com/obulks/public/raw/master/lobby/beijing_aiai.jpg',
+          //       'https://gitee.com/obulks/public/raw/master/lobby/beijing_aiai.jpg',
+          //     ],
+          //   ),
+          // ),
           Container(
-            // decoration: BoxDecoration(
-            //   border: Border(
-            //     bottom: BorderSide(
-            //       width: 1.px,
-            //       color: Color(0xffe5e5e5),
-            //     ),
-            //   ),
-            // ),
-            child: NineGridView(
-              width: 343.px,
-              padding: EdgeInsets.all(0),
-              margin: EdgeInsets.all(8),
-              space: 4.px,
-              type: NineGridType.weiBo,
-              itemCount: 8,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  child: CachedNetworkImage(
-                    imageUrl:
-                        'https://gitee.com/obulks/public/raw/master/lobby/beijing_aiai.jpg',
-                    imageBuilder: (context, imageProvider) => Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4.px),
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              },
+            padding: EdgeInsets.all(8.px),
+            child: NineOldWidget(
+              images: [
+                'https://gitee.com/obulks/public/raw/master/lobby/beijing_aiai.jpg',
+                'https://gitee.com/obulks/public/raw/master/lobby/beijing_aiai.jpg',
+                'https://gitee.com/obulks/public/raw/master/lobby/beijing_aiai.jpg',
+                'https://gitee.com/obulks/public/raw/master/lobby/beijing_aiai.jpg',
+                'https://gitee.com/obulks/public/raw/master/lobby/beijing_aiai.jpg',
+              ],
             ),
           ),
         ],
@@ -204,6 +213,4 @@ class _ItemCard extends StatelessWidget {
     );
   }
 }
-
-
-
+ */

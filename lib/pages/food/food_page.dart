@@ -35,13 +35,20 @@ class _FoodPageState extends State<FoodPage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              FoodGroupPanel(),
-            ],
+      body: ScrollConfiguration(
+        behavior: ScrollBehavior(),
+        child: GlowingOverscrollIndicator(
+          color: Theme.of(context).primaryColor,
+          axisDirection: AxisDirection.down,
+          child: SingleChildScrollView(
+            physics: ClampingScrollPhysics(),
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  FoodGroupPanel(),
+                ],
+              ),
+            ),
           ),
         ),
       ),

@@ -37,14 +37,14 @@ class App extends StatelessWidget {
         cursorColor: Colors.white,
       ),
       initialRoute: '/',
-      // initialRoute: '/',
+      // initialRoute: '/find',
       routes: {
         '/': (context) => AppHomeScreen(),
         '/home': (context) => HomePage(),
         '/login': (context) => LoginPage(),
         '/food': (context) => FoodPage(),
         '/find': (context) => FindPage(),
-        '/my': (context) => MyPage(),
+        '/me': (context) => MePage(),
       },
     );
   }

@@ -8,7 +8,7 @@ class LoadNetworkImage extends StatelessWidget {
   final Widget errorWidget;
 
   const LoadNetworkImage({
-    this.url,
+    @required this.url,
     this.borderRadiusSize,
     this.placeholder,
     this.errorWidget,
@@ -19,7 +19,7 @@ class LoadNetworkImage extends StatelessWidget {
       imageUrl: url,
       imageBuilder: (context, imageProvider) => Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(borderRadiusSize),
+          borderRadius: BorderRadius.circular(borderRadiusSize ?? 0),
           image: DecorationImage(
             image: imageProvider,
             fit: BoxFit.cover,

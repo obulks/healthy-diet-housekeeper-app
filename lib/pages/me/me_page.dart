@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_diet_housekeeper/public.dart';
 
-class MyPage extends StatefulWidget {
+class MePage extends StatefulWidget {
   @override
-  _MyPageState createState() => _MyPageState();
+  _MePageState createState() => _MePageState();
 }
 
-class _MyPageState extends State<MyPage> {
+class _MePageState extends State<MePage> {
   @override
   Widget build(BuildContext context) {
     SizeFit.initialize(context);

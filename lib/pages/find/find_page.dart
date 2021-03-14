@@ -14,7 +14,7 @@ class _FindPageState extends State<FindPage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          elevation: 0,
+          elevation: 2,
           title: Text(
             '发现',
             style: TextStyle(
@@ -67,8 +67,10 @@ class _FindPageState extends State<FindPage> {
                           text: '推荐',
                         ),
                       ),
-                      Tab(
-                        text: '健康资讯',
+                      Container(
+                        child: Tab(
+                          text: '健康资讯',
+                        ),
                       ),
                     ],
                   ),
@@ -78,29 +80,7 @@ class _FindPageState extends State<FindPage> {
                 child: TabBarView(
                   children: [
                     RecommendPage(),
-                    Container(
-                      child: ListView(
-                        physics: BouncingScrollPhysics(),
-                        children: [
-                          ListTile(title: Text('suggest 01')),
-                          ListTile(title: Text('suggest 02')),
-                          ListTile(title: Text('suggest 03')),
-                          ListTile(title: Text('suggest 04')),
-                          ListTile(title: Text('suggest 01')),
-                          ListTile(title: Text('suggest 02')),
-                          ListTile(title: Text('suggest 03')),
-                          ListTile(title: Text('suggest 04')),
-                          ListTile(title: Text('suggest 01')),
-                          ListTile(title: Text('suggest 02')),
-                          ListTile(title: Text('suggest 03')),
-                          ListTile(title: Text('suggest 04')),
-                          ListTile(title: Text('suggest 01')),
-                          ListTile(title: Text('suggest 02')),
-                          ListTile(title: Text('suggest 03')),
-                          ListTile(title: Text('suggest 04')),
-                        ],
-                      ),
-                    ),
+                    NewsPage(),
                   ],
                 ),
               ),
