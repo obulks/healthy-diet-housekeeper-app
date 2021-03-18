@@ -24,7 +24,7 @@ class _FindPageState extends State<FindPage> {
           ),
           actions: [
             Padding(
-              padding: EdgeInsets.only(right: 16),
+              padding: EdgeInsets.only(right: 16.px),
               child: GestureDetector(
                 child: Icon(
                   Icons.email_outlined,

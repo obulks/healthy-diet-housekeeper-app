@@ -7,21 +7,30 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var buttonIcons;
+  var _buttonIcons;
+  // 参考摄入量
+  double _referenceCalorie;
+  // 当前摄入量
+  double _intakeCalorie;
+  // 剩余摄入量
+  double _residualCalorie;
 
-  void initData() {
-    buttonIcons = [
+  void _initData() {
+    _buttonIcons = [
       Image.asset('assets/icons/breakfast.png', width: 32.px, height: 32.px),
       Image.asset('assets/icons/lunch.png', width: 32.px, height: 32.px),
       Image.asset('assets/icons/dinner.png', width: 32.px, height: 32.px),
       Image.asset('assets/icons/snack2.png', width: 32.px, height: 32.px),
     ];
+    _referenceCalorie = 1980;
+    _intakeCalorie = 1593;
+    _residualCalorie = _referenceCalorie - _intakeCalorie;
   }
 
   @override
   Widget build(BuildContext context) {
     SizeFit.initialize(context);
-    initData();
+    _initData();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -33,7 +42,7 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 16),
+            padding: EdgeInsets.only(right: 16.px),
             child: GestureDetector(
               child: Icon(
                 Icons.email_outlined,
@@ -74,6 +83,17 @@ class _HomePageState extends State<HomePage> {
                 child: Stack(
                   children: [
                     Positioned(
+                      top: 8.px,
+                      right: 8.px,
+                      child: Text(
+                        '单位：千卡',
+                        style: TextStyle(
+                            fontSize: 11.px,
+                            color: Colors.black26,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    Positioned(
                       top: 16.px,
                       left: 122.px,
                       child: CircularPercentIndicator(
@@ -81,7 +101,13 @@ class _HomePageState extends State<HomePage> {
                         lineWidth: 12.px,
                         animation: true,
                         animationDuration: 800,
-                        percent: 0.7,
+                        percent: () {
+                          if (_intakeCalorie > _referenceCalorie) {
+                            return 1.0;
+                          }
+                          return (_intakeCalorie / _referenceCalorie)
+                              .toDouble();
+                        }(),
                         circularStrokeCap: CircularStrokeCap.round,
                         backgroundColor:
                             Theme.of(context).primaryColor.withOpacity(.2),
@@ -94,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                       child: ShowCalorie(
                         animation: false,
                         text: '推荐',
-                        upperBound: 1998,
+                        upperBound: _referenceCalorie,
                       ),
                     ),
                     Positioned(
@@ -102,18 +128,27 @@ class _HomePageState extends State<HomePage> {
                       left: 142.px,
                       child: ShowCalorie(
                         animation: true,
-                        text: '剩余',
-                        lowerBound: 600,
-                        upperBound: 1798,
+                        text: '摄入',
+                        upperBound: _intakeCalorie,
                       ),
                     ),
                     Positioned(
                       top: 48.px,
                       right: 32.px,
                       child: ShowCalorie(
-                        animation: false,
-                        text: '摄入',
-                        upperBound: 200,
+                        animation: true,
+                        text: () {
+                          if (_intakeCalorie > _referenceCalorie) {
+                            return '超出';
+                          }
+                          return '剩余';
+                        }(),
+                        upperBound: () {
+                          if (_intakeCalorie > _referenceCalorie) {
+                            return _intakeCalorie - _referenceCalorie;
+                          }
+                          return _residualCalorie;
+                        }(),
                       ),
                     ),
                     Positioned(
@@ -123,6 +158,7 @@ class _HomePageState extends State<HomePage> {
                         text: '蛋白质',
                         total: '20',
                         curr: '11',
+                        percent: 11 / 20,
                         backgroundColor: Color(0xff9999ff).withOpacity(.4),
                         progressColor: Color(0xff9999ff),
                       ),
@@ -134,7 +170,7 @@ class _HomePageState extends State<HomePage> {
                         text: '碳水化合物',
                         total: '54',
                         curr: '15',
-                        percent: 0.4,
+                        percent: 15 / 54,
                         backgroundColor: Color(0xffff8080).withOpacity(.4),
                         progressColor: Color(0xffff8080),
                       ),
@@ -146,6 +182,7 @@ class _HomePageState extends State<HomePage> {
                         text: '脂肪',
                         total: '24',
                         curr: '6',
+                        percent: 6 / 24,
                         backgroundColor: Color(0xffffb366).withOpacity(.4),
                         progressColor: Color(0xffffb366),
                       ),
@@ -157,7 +194,7 @@ class _HomePageState extends State<HomePage> {
                 height: 20.px,
               ),
               RecordFoodButton(
-                icon: buttonIcons[0],
+                icon: _buttonIcons[0],
                 title: '早餐',
                 subTitle: '建议不超过432千卡',
                 onTap: () {
@@ -165,7 +202,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               RecordFoodButton(
-                icon: buttonIcons[1],
+                icon: _buttonIcons[1],
                 title: '午餐',
                 subTitle: '建议不超过432千卡',
                 onTap: () {
@@ -173,7 +210,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               RecordFoodButton(
-                icon: buttonIcons[2],
+                icon: _buttonIcons[2],
                 title: '晚餐',
                 subTitle: '建议不超过432千卡',
                 onTap: () {
@@ -181,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               RecordFoodButton(
-                icon: buttonIcons[3],
+                icon: _buttonIcons[3],
                 title: '加餐',
                 subTitle: '建议不超过432千卡',
                 onTap: () {

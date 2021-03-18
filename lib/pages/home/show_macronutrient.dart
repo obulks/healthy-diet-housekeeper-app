@@ -13,7 +13,7 @@ class ShowMacronutrient extends StatelessWidget {
       {this.text,
         this.total,
         this.curr,
-        this.percent = 0.5,
+        this.percent,
         this.progressColor,
         this.backgroundColor});
 
@@ -38,7 +38,7 @@ class ShowMacronutrient extends StatelessWidget {
             lineHeight: 4.px,
             animation: true,
             animationDuration: 800,
-            percent: percent,
+            percent: percent ?? 0.5,
             backgroundColor: backgroundColor,
             progressColor: progressColor,
             padding: EdgeInsets.all(2.px),

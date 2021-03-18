@@ -37,9 +37,7 @@ class RecordFoodButton extends StatelessWidget {
         ],
       ),
       child: GestureDetector(
-        onTap: () {
-          onTap();
-        },
+        onTap: onTap,
         child: Container(
           color: Colors.transparent,
           child: Row(

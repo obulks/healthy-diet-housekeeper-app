@@ -9,7 +9,7 @@ class RecommendPage extends StatefulWidget {
 class _RecommendPageState extends State<RecommendPage> {
   ScrollController _scrollController;
   Timer _timer;
-  Duration durationTime = Duration(milliseconds: 400);
+  Duration _durationTime = Duration(milliseconds: 400);
   List<int> _dataList;
   bool _loadingFlag = false;
 
@@ -91,7 +91,7 @@ class _RecommendPageState extends State<RecommendPage> {
   _scrollListener() {
     // 上拉加载防抖
     _timer?.cancel();
-    _timer = Timer(durationTime, () {
+    _timer = Timer(_durationTime, () {
       // 可滚动的最大距离
       double maxScrollExtent = _scrollController.position.maxScrollExtent;
       // 当前滚动的位置
@@ -130,87 +130,3 @@ class _RecommendPageState extends State<RecommendPage> {
     setState(() {});
   }
 }
-
-/*
-class _PostCard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 1,
-      margin: EdgeInsets.all(8.px),
-      child: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.only(
-              top: 8.px,
-              left: 8.px,
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 40.px,
-                  height: 40.px,
-                  child: LoadNetworkImage(
-                    url:
-                        'http://i1.hdslb.com/bfs/face/681d4084f2e7e423fa188339c51a438c2eae59b2.jpg',
-                    borderRadiusSize: 20.px,
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.only(left: 8.px),
-                  child: Text(
-                    'Username',
-                    style: TextStyle(
-                      fontSize: 15.px,
-                      // color: Color(0xff444444),
-                      color: Colors.black54,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            alignment: Alignment.topLeft,
-            padding: EdgeInsets.only(
-              top: 8.px,
-              left: 8.px,
-            ),
-            child: Text(
-              'Flutter是一个由谷歌开发的开源移动应用软件开发工具包，用于为Android、iOS、Windows、Mac、Linux、Google Fuchsia开发应用。\nFlutter第一个版本支持Android操作系统，开发代号称作“Sky”。\nFlutter是一个由谷歌开发的开源移动应用软件开发工具包，用于为Android、iOS、Windows、Mac、Linux、Google Fuchsia开发应用。 \nFlutter第一个版本支持Android操作系统，开发代号称作“Sky”。',
-              style: TextStyle(
-                fontSize: 14.px,
-                height: 1.5,
-                color: Color(0xff333E57),
-              ),
-              maxLines: 6,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          // Container(
-          //   child: CustomNineGridView(
-          //     urls: [
-          //       'https://gitee.com/obulks/public/raw/master/lobby/beijing_aiai.jpg',
-          //       'https://gitee.com/obulks/public/raw/master/lobby/beijing_aiai.jpg',
-          //       'https://gitee.com/obulks/public/raw/master/lobby/beijing_aiai.jpg',
-          //     ],
-          //   ),
-          // ),
-          Container(
-            padding: EdgeInsets.all(8.px),
-            child: NineOldWidget(
-              images: [
-                'https://gitee.com/obulks/public/raw/master/lobby/beijing_aiai.jpg',
-                'https://gitee.com/obulks/public/raw/master/lobby/beijing_aiai.jpg',
-                'https://gitee.com/obulks/public/raw/master/lobby/beijing_aiai.jpg',
-                'https://gitee.com/obulks/public/raw/master/lobby/beijing_aiai.jpg',
-                'https://gitee.com/obulks/public/raw/master/lobby/beijing_aiai.jpg',
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
- */

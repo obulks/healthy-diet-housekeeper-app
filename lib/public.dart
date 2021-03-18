@@ -32,6 +32,9 @@ export 'package:healthy_diet_housekeeper/pages/home/show_macronutrient.dart';
 export 'package:healthy_diet_housekeeper/pages/login/authcode_button.dart';
 export 'package:healthy_diet_housekeeper/pages/find/post_card.dart';
 export 'package:healthy_diet_housekeeper/pages/find/news_item.dart';
+export 'package:healthy_diet_housekeeper/pages/me/user_bar.dart';
+export 'package:healthy_diet_housekeeper/pages/me/to_login_button.dart';
+export 'package:healthy_diet_housekeeper/pages/me/fn_button.dart';
 
 // plugins
 export 'package:provider/provider.dart';

@@ -34,4 +34,5 @@ flutter:
   assets:
     - assets/icons/
     - assets/icons/food_group/
+    - assets/icons/me_page/
 
