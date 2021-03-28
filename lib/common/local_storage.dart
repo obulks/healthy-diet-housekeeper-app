@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalStorage {
-  Future set<T>(key, value) async {
+  static Future set<T>(key, value) async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     try {
       switch (T) {
@@ -25,13 +25,13 @@ class LocalStorage {
     }
   }
 
-  Future get(key) async {
+  static Future get(key) async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     return sp.get(key);
   }
 
-  Future clear() async {
+  static Future clear() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
-    return sp.clear();
+    sp.clear();
   }
 }

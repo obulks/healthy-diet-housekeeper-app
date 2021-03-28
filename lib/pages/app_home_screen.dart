@@ -25,12 +25,11 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
   }
 
   Future _validateLogin() async {
-    LocalStorage sp = new LocalStorage();
+    // LocalStorage.clear();
+    var result = await LocalStorage.get('login');
+    print('app_home_screen.dart result: $result');
 
-    var result = await sp.get('login');
-    print(result);
-
-    if (result != null) {
+    if (result == true) {
       setState(() {
         _isLogin = true;
       });

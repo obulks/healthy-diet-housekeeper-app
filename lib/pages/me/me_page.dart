@@ -48,6 +48,8 @@ class _MePageState extends State<MePage> {
                 color: Colors.white,
               ),
               onTap: () {
+                LocalStorage.set<bool>('login', false);
+                Navigator.pushReplacementNamed(context, '/login');
                 print('setting tap');
               },
             ),
@@ -88,30 +90,18 @@ class _MePageState extends State<MePage> {
                       color: Theme.of(context).primaryColor,
                     ),
                   ),
-                  _loginFlag == true
-                      ? Positioned(
-                          top: 8.px,
-                          left: 16.px,
-                          child: UserBar(
-                            username: null,
-                            avatarUrl:
-                                'http://tiebapic.baidu.com/forum/w%3D580/sign=5183bf97e5d3572c66e29cd4ba126352/0816213fb80e7bec0fb5eb9f382eb9389b506b7c.jpg',
-                            onTap: () {
-                              print('edit username');
-                            },
-                          ),
-                        )
-                      : Positioned(
-                          top: 16.px,
-                          left: ((375 - 80) / 2).px,
-                          child: GestureDetector(
-                            child: ToLogin(),
-                            onTap: () {
-                              Navigator.pushNamed(context, '/login');
-                              _loginFlag = !_loginFlag;
-                            },
-                          ),
-                        ),
+                  Positioned(
+                    top: 8.px,
+                    left: 16.px,
+                    child: UserBar(
+                      username: null,
+                      avatarUrl:
+                          'http://tiebapic.baidu.com/forum/w%3D580/sign=5183bf97e5d3572c66e29cd4ba126352/0816213fb80e7bec0fb5eb9f382eb9389b506b7c.jpg',
+                      onTap: () {
+                        print('edit username');
+                      },
+                    ),
+                  ),
                   Positioned(
                     bottom: 0,
                     left: ((375 - 344) / 2).px,

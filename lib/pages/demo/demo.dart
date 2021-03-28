@@ -51,7 +51,7 @@ class _DemoState extends State<Demo> {
   }
 
   _saveData() {
-    _localStorage.set<bool>('login', true);
+    LocalStorage.set<bool>('login', true);
   }
   _getData() async {
     // print(await _localStorage.get('login'));
@@ -61,6 +61,5 @@ class _DemoState extends State<Demo> {
   @override
   void initState() {
     super.initState();
-    _localStorage = new LocalStorage();
   }
 }

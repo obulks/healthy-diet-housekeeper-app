@@ -29,7 +29,7 @@ class _AuthCodeButtonState extends State<AuthCodeButton> {
   Timer _timer;
 
   // 当前倒计时的秒数。
-  int _seconds;
+  int _seconds = 60;
 
   // 当前的文本。
   String _verifyStr = '获取验证码';
@@ -37,7 +37,6 @@ class _AuthCodeButtonState extends State<AuthCodeButton> {
   @override
   void initState() {
     super.initState();
-    _seconds = widget.countdown;
   }
 
   @override
@@ -53,9 +52,9 @@ class _AuthCodeButtonState extends State<AuthCodeButton> {
         Duration(seconds: 1),
         (Timer timer) => {
               setState(() {
-                if (_seconds <= 0) {
-                  _verifyStr = '获取验证码';
+                if (_seconds < 1) {
                   _timer.cancel();
+                  _verifyStr = '获取验证码';
                   _seconds = 60;
                   _currentColor = _availableColor;
                   _currentWidth = _availableWidth;
@@ -102,6 +101,12 @@ class _AuthCodeButtonState extends State<AuthCodeButton> {
         // 按钮在点击后不可用
         onPressed: _seconds == 60
             ? () {
+                setState(() {
+                  _seconds = 60;
+                  _verifyStr = '$_seconds秒';
+                  _currentColor = _unavailableColor;
+                  _currentWidth = _unavailableWidth;
+                });
                 _startTimer();
                 widget.onTapCallback();
               }
