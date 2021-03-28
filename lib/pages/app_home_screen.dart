@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:healthy_diet_housekeeper/public.dart';
 import 'dart:math' as math;
 
-
 class AppHomeScreen extends StatefulWidget {
   @override
   _AppHomeScreenState createState() => _AppHomeScreenState();
@@ -10,50 +9,72 @@ class AppHomeScreen extends StatefulWidget {
 
 class _AppHomeScreenState extends State<AppHomeScreen> {
   int _tabIndex = 0;
-  var _tabImages;
-  var _appBarTitles = ['首页', '食材', '', '发现', '我的'];
-  var _pageList;
+  bool _isLogin;
+  List<List<Image>> _tabImages;
+  List<String> _appBarTitles = ['首页', '食材', '', '发现', '我的'];
+  List<Widget> _pageList;
   final _bottomSheetScaffoldKey = GlobalKey<ScaffoldState>();
   final _bottomNavigationBarKey = GlobalKey();
-  /*
-   * 根据选择获得对应的normal或是press的img
-   */
 
-  Image getTabIcon(int curIndex) {
+  @override
+  Widget build(BuildContext context) {
+    SizeFit.initialize(context);
+    _initResources();
+    // 如果未登录则加载登录页
+    return _isLogin == true ? _appHomeScreenWidget() : LoginPage();
+  }
+
+  Future _validateLogin() async {
+    LocalStorage sp = new LocalStorage();
+
+    var result = await sp.get('login');
+    print(result);
+
+    if (result != null) {
+      setState(() {
+        _isLogin = true;
+      });
+    } else {
+      setState(() {
+        _isLogin = false;
+      });
+    }
+  }
+
+  // 获得正常状态或是点击状态的图标
+  Image _getTabIcon(int curIndex) {
     if (curIndex == _tabIndex) {
       return _tabImages[curIndex][1];
     }
     return _tabImages[curIndex][0];
   }
 
-  /*
-   * 根据image路径获取图片
-   */
-  Image getTabImage(path) {
+  // 根据image路径获取图片
+  Image _getTabImage(path) {
     return Image.asset(path, width: 24.px, height: 24.px);
   }
 
-  void initData() {
+  void _initResources() {
     _tabImages = [
       [
-        getTabImage('assets/icons/tab1.png'),
-        getTabImage('assets/icons/tab1s.png'),
+        _getTabImage('assets/icons/tab1.png'),
+        _getTabImage('assets/icons/tab1s.png'),
       ],
       [
-        getTabImage('assets/icons/tab2.png'),
-        getTabImage('assets/icons/tab2s.png'),
+        _getTabImage('assets/icons/tab2.png'),
+        _getTabImage('assets/icons/tab2s.png'),
       ],
       [
-        getTabImage('assets/icons/tab3.png'),
-        getTabImage('assets/icons/tab3s.png'),
+        _getTabImage('assets/icons/tab3.png'),
+        _getTabImage('assets/icons/tab3s.png'),
       ],
       [
-        getTabImage('assets/icons/tab3.png'),
-        getTabImage('assets/icons/tab3s.png'),
+        _getTabImage('assets/icons/tab3.png'),
+        _getTabImage('assets/icons/tab3s.png'),
       ],
       [
-        getTabImage('assets/icons/tab4.png'),
-        getTabImage('assets/icons/tab4s.png'),
+        _getTabImage('assets/icons/tab4.png'),
+        _getTabImage('assets/icons/tab4s.png'),
       ],
     ];
     /*
@@ -74,17 +95,10 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((_) => _buildDoneCallback());
+    _validateLogin();
   }
 
-  // _buildDoneCallback() {
-  // }
-
-  @override
-  Widget build(BuildContext context) {
-    SizeFit.initialize(context);
-    initData();
-    // _bottomNavigationBarHeight = _bottomNavigationBarKey.currentContext.size.height;
+  Widget _appHomeScreenWidget() {
     return Scaffold(
       key: _bottomSheetScaffoldKey,
       body: _pageList[_tabIndex],
@@ -100,21 +114,17 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
           unselectedItemColor: Color(0xffDCE0E7),
           items: [
             BottomNavigationBarItem(
-                icon: getTabIcon(0), label: '${_appBarTitles[0]}'),
+                icon: _getTabIcon(0), label: '${_appBarTitles[0]}'),
             BottomNavigationBarItem(
-                icon: getTabIcon(1), label: '${_appBarTitles[1]}'),
+                icon: _getTabIcon(1), label: '${_appBarTitles[1]}'),
             BottomNavigationBarItem(icon: Icon(Icons.add), label: ''),
             BottomNavigationBarItem(
-                icon: getTabIcon(3), label: '${_appBarTitles[3]}'),
+                icon: _getTabIcon(3), label: '${_appBarTitles[3]}'),
             BottomNavigationBarItem(
-                icon: getTabIcon(4), label: '${_appBarTitles[4]}'),
+                icon: _getTabIcon(4), label: '${_appBarTitles[4]}'),
           ],
           onTap: (index) {
-            if (index != 2) {
-              setState(() {
-                _tabIndex = index;
-              });
-            }
+            _bottomNavigationChange(index);
           },
         ),
       ),
@@ -131,6 +141,14 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
       ),
       floatingActionButtonLocation: centerDocked,
     );
+  }
+
+  _bottomNavigationChange(int index) {
+    if (index != 2) {
+      setState(() {
+        _tabIndex = index;
+      });
+    }
   }
 
   void _openModalBottomSheet() async {

@@ -42,7 +42,7 @@ class _AuthCodeButtonState extends State<AuthCodeButton> {
 
   @override
   void dispose() {
-    if(_timer != null) {
+    if (_timer != null) {
       _timer.cancel();
     }
     super.dispose();
@@ -51,22 +51,22 @@ class _AuthCodeButtonState extends State<AuthCodeButton> {
   void _startTimer() {
     _timer = Timer.periodic(
         Duration(seconds: 1),
-            (Timer timer) => {
-          setState(() {
-            if (_seconds <= 0) {
-              _verifyStr = '获取验证码';
-              _timer.cancel();
-              _seconds = 60;
-              _currentColor = _availableColor;
-              _currentWidth = _availableWidth;
-            } else {
-              _seconds -= 1;
-              _verifyStr = '$_seconds秒';
-              _currentColor = _unavailableColor;
-              _currentWidth = _unavailableWidth;
-            }
-          })
-        });
+        (Timer timer) => {
+              setState(() {
+                if (_seconds <= 0) {
+                  _verifyStr = '获取验证码';
+                  _timer.cancel();
+                  _seconds = 60;
+                  _currentColor = _availableColor;
+                  _currentWidth = _availableWidth;
+                } else {
+                  _seconds -= 1;
+                  _verifyStr = '$_seconds秒';
+                  _currentColor = _unavailableColor;
+                  _currentWidth = _unavailableWidth;
+                }
+              })
+            });
   }
 
   @override
@@ -102,9 +102,9 @@ class _AuthCodeButtonState extends State<AuthCodeButton> {
         // 按钮在点击后不可用
         onPressed: _seconds == 60
             ? () {
-          _startTimer();
-          widget.onTapCallback();
-        }
+                _startTimer();
+                widget.onTapCallback();
+              }
             : null,
       ),
     );

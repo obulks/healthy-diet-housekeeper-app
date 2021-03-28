@@ -154,7 +154,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.pop(context);
+                  var sp = new LocalStorage();
+                  sp.set<bool>('login', true);
+                  print('login');
+                  Navigator.pushNamed(context, '/');
                 },
               ),
             ),

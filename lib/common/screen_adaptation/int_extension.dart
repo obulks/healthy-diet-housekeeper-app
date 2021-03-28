@@ -1,4 +1,4 @@
-import './size_fit.dart';
+import '../../common/screen_adaptation/size_fit.dart';
 
 extension IntFit on int {
   double get px {
