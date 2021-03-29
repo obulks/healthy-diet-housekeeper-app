@@ -55,7 +55,7 @@ class _DemoState extends State<Demo> {
   }
   _getData() async {
     // print(await _localStorage.get('login'));
-    print(await UserApi.login());
+    // print(await UserApi.login('1'));
   }
 
   @override

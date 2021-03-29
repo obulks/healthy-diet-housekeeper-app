@@ -8,7 +8,9 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _telController = new TextEditingController();
+  String _authCode;
+  String _phone;
+  TextEditingController _phoneController = new TextEditingController();
   TextEditingController _authCodeController = new TextEditingController();
 
   @override
@@ -58,7 +60,10 @@ class _LoginPageState extends State<LoginPage> {
                         Container(
                           margin: EdgeInsets.only(right: 71.px),
                           child: TextFormField(
-                            controller: _telController,
+                            controller: _phoneController,
+                            onSaved: (value) {
+                              _phone = value;
+                            },
                             keyboardType: TextInputType.number,
                             cursorColor: Colors.black,
                             cursorWidth: 1,
@@ -77,10 +82,6 @@ class _LoginPageState extends State<LoginPage> {
                                     BorderSide(color: Color(0xffCCCCCC)),
                               ),
                             ),
-                            // 校验用户名
-                            validator: (v) {
-                              return v.trim().length > 0 ? null : "用户名不能为空";
-                            },
                           ),
                         ),
                         SizedBox(
@@ -90,6 +91,9 @@ class _LoginPageState extends State<LoginPage> {
                           margin: EdgeInsets.only(right: 48.px),
                           child: TextFormField(
                             controller: _authCodeController,
+                            onSaved: (value) {
+                              _authCode = value;
+                            },
                             keyboardType: TextInputType.number,
                             cursorColor: Colors.black,
                             cursorWidth: 1,
@@ -111,10 +115,6 @@ class _LoginPageState extends State<LoginPage> {
                                 onTapCallback: _getAuthCode,
                               ),
                             ),
-                            // 校验用户名
-                            validator: (v) {
-                              return v.trim().length > 0 ? null : "手机号码不能为空";
-                            },
                           ),
                         ),
                         SizedBox(
@@ -139,28 +139,37 @@ class _LoginPageState extends State<LoginPage> {
                   height: 87.px,
                 ),
                 Container(
-                  width: 320,
-                  height: 50,
+                  width: 320.px,
+                  height: 50.px,
                   padding: EdgeInsets.all(0),
                   margin: EdgeInsets.all(0),
-                  child: RaisedButton(
+                  child: Material(
                     color: Theme.of(context).primaryColor,
-                    splashColor: Colors.transparent,
-                    highlightColor: Color(0xff00C4A2),
-                    elevation: 0,
-                    highlightElevation: 1,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: Text(
-                      '登录',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.px,
-                        fontWeight: FontWeight.w500,
+                    borderRadius: BorderRadius.circular(25.px),
+                    child: InkWell(
+                      hoverColor: Colors.transparent,
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      borderRadius: BorderRadius.circular(25.px),
+                      child: Container(
+                        width: 200.px,
+                        height: 60.px,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25.px),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          '登录',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16.px,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                       ),
+                      onTap: _handleLogin,
                     ),
-                    onPressed: () => _handleLogin(context),
                   ),
                 ),
               ],
@@ -171,22 +180,70 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _handleLogin(BuildContext context) {
-    // LocalStorage.set<bool>('login', true);
-    // LocalStorage.clear();
-    // 替换路由
-    // Navigator.pushReplacementNamed(context, '/');
+  _handleLogin() async {
+    // 保存输入框的值
+    _formKey.currentState.save();
+    // 手机号和验证码校验不通过则退出函数
+    if (!_validatorPhone(_phone) || !_validatorAuthCode(_authCode)) {
+      return;
+    }
+
+    Login loginResult = await UserApi.login(_phone, _authCode);
+    if (loginResult.code == 200) {
+      // 存储登录状态和token
+      LocalStorage.set<bool>('login', true);
+      LocalStorage.set<String>('token', loginResult.data.token);
+      // 替换路由
+      Navigator.pushReplacementNamed(context, '/');
+    } else {
+      Toast.show(loginResult.msg);
+      return;
+    }
+
     print('login_page: login');
     Toast.show('登录成功');
   }
 
   _getAuthCode() async {
-    String phone = '15778664829';
-    Sms smsResult = await SmsApi.send(phone);
-    if (smsResult.code == 200) {
-      Toast.show(smsResult.msg);
-    } else {
-      Toast.show(smsResult.msg);
+    if (_validatorPhone(_phone)) {
+      Sms smsResult = await SmsApi.send(_phone);
+      if (smsResult.code == 200) {
+        Toast.show(smsResult.msg);
+      } else {
+        Toast.show(smsResult.msg);
+      }
     }
+  }
+
+  bool _validatorPhone(v) {
+    v = v.trim();
+    RegExp regExp = new RegExp(
+        r'^1(3\d|4[5-9]|5[0-35-9]|6[567]|7[0-8]|8\d|9[0-35-9])\d{8}$');
+    if (v.length == 0) {
+      Toast.show("请输入您的手机号");
+      return false;
+    }
+    if (v.length != 11 || regExp.hasMatch(v) != true) {
+      Toast.show("请检查您的手机号");
+      return false;
+    }
+    return true;
+  }
+
+  bool _validatorAuthCode(v) {
+    v = v.trim();
+    RegExp regExp = new RegExp(r"\d{6}$");
+
+    if (v.length == 0) {
+      Toast.show('请输入您的验证码');
+      return false;
+    }
+
+    if (v.length != 6 || regExp.hasMatch(v) != true) {
+      Toast.show('请检查验证码格式');
+      return false;
+    }
+
+    return true;
   }
 }

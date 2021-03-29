@@ -1,7 +1,7 @@
 class User {
   String username;
   String password;
-  BodyInfo bodyInfo;
+  _BodyInfo bodyInfo;
 
   User({this.username, this.password, this.bodyInfo});
 
@@ -9,7 +9,7 @@ class User {
     username = json['username'];
     password = json['password'];
     bodyInfo = json['body_info'] != null
-        ? new BodyInfo.fromJson(json['body_info'])
+        ? new _BodyInfo.fromJson(json['body_info'])
         : null;
   }
 
@@ -24,15 +24,15 @@ class User {
   }
 }
 
-class BodyInfo {
+class _BodyInfo {
   String sex;
   String birthday;
   int height;
   int weight;
 
-  BodyInfo({this.sex, this.birthday, this.height, this.weight});
+  _BodyInfo({this.sex, this.birthday, this.height, this.weight});
 
-  BodyInfo.fromJson(Map<String, dynamic> json) {
+  _BodyInfo.fromJson(Map<String, dynamic> json) {
     sex = json['sex'];
     birthday = json['birthday'];
     height = json['height'];

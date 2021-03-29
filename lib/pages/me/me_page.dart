@@ -49,6 +49,7 @@ class _MePageState extends State<MePage> {
               ),
               onTap: () {
                 LocalStorage.set<bool>('login', false);
+                LocalStorage.set<String>('token', null);
                 Navigator.pushReplacementNamed(context, '/login');
                 print('setting tap');
               },

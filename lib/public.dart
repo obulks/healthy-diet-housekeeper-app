@@ -15,8 +15,9 @@ export 'package:healthy_diet_housekeeper/common/api/user.dart';
 export 'package:healthy_diet_housekeeper/common/api/sms.dart';
 
 // modules
-export 'package:healthy_diet_housekeeper/models/sms.dart';
 export 'package:healthy_diet_housekeeper/models/user.dart';
+export 'package:healthy_diet_housekeeper/models/sms.dart';
+export 'package:healthy_diet_housekeeper/models/login.dart';
 
 // pages
 export 'package:healthy_diet_housekeeper/pages/app_home_screen.dart';

@@ -1,18 +1,22 @@
-import 'dart:io';
-import 'package:dio/dio.dart';
+import 'package:healthy_diet_housekeeper/public.dart';
 
 class UserApi {
-  // static final String baseUrl = 'http://192.168.1.101:3000';
-  static final String baseUrl = 'http://api.obulks.com';
+  static final String _baseUrl = 'http://192.168.1.101:3000/users';
 
-  static Future login() async {
+  static Future login(String phone, String code) async {
     Dio dio = new Dio();
+
     dio.options.headers = {
       'content-type': 'application/json',
     };
-    dio.get('$baseUrl').then((response) {
-      print('response: $response');
-      return response;
+
+    Map<String, dynamic> data = {
+      "phone": phone,
+      "code": code,
+    };
+    return dio.post('$_baseUrl/login', data: data).then((response) {
+      print('UserApi response: $response');
+      return Login.fromJson(response.data);
     }).catchError((err) {
       print('dio error: $err');
     });

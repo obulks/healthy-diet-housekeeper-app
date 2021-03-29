@@ -12,8 +12,8 @@ class Toast {
         fontSize: 12.px,
       ),
       position: ToastPosition(
-        align: Alignment.center,
-        offset: 10.px,
+        align: Alignment.topCenter,
+        offset: 20.px,
       ),
       duration: Duration(
         seconds: 2,
