@@ -26,26 +26,31 @@ void main() {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'AppTitle',
-      theme: ThemeData(
-        primaryColor: Color(0xff3fdabf),
-        backgroundColor: Color(0xffF7F8F9),
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        cursorColor: Colors.white,
+    return OKToast(
+      dismissOtherOnShow: true,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'AppTitle',
+        theme: ThemeData(
+          textSelectionTheme: TextSelectionThemeData(
+            cursorColor: Colors.white,
+          ),
+          primaryColor: Color(0xff3fdabf),
+          backgroundColor: Color(0xffF7F8F9),
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+        ),
+        initialRoute: '/',
+        // initialRoute: '/find',
+        routes: {
+          '/': (context) => AppHomeScreen(),
+          '/home': (context) => HomePage(),
+          '/login': (context) => LoginPage(),
+          '/food': (context) => FoodPage(),
+          '/find': (context) => FindPage(),
+          '/me': (context) => MePage(),
+        },
       ),
-      initialRoute: '/',
-      // initialRoute: '/find',
-      routes: {
-        '/': (context) => AppHomeScreen(),
-        '/home': (context) => HomePage(),
-        '/login': (context) => LoginPage(),
-        '/food': (context) => FoodPage(),
-        '/find': (context) => FindPage(),
-        '/me': (context) => MePage(),
-      },
     );
   }
 }
