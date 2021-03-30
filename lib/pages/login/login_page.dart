@@ -8,8 +8,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  String _authCode;
-  String _phone;
+  String _authCode = "";
+  String _phone = "";
   TextEditingController _phoneController = new TextEditingController();
   TextEditingController _authCodeController = new TextEditingController();
 
@@ -112,6 +112,8 @@ class _LoginPageState extends State<LoginPage> {
                                     BorderSide(color: Color(0xffCCCCCC)),
                               ),
                               suffixIcon: AuthCodeButton(
+                                phoneController: _phoneController,
+                                formKey: _formKey,
                                 onTapCallback: _getAuthCode,
                               ),
                             ),
@@ -184,11 +186,13 @@ class _LoginPageState extends State<LoginPage> {
     // 保存输入框的值
     _formKey.currentState.save();
     // 手机号和验证码校验不通过则退出函数
-    if (!_validatorPhone(_phone) || !_validatorAuthCode(_authCode)) {
+    if (!Validator.phone(_phone) || !Validator.authCode(_authCode)) {
       return;
     }
 
     Login loginResult = await UserApi.login(_phone, _authCode);
+
+    // 状态200表示登录成功
     if (loginResult.code == 200) {
       // 存储登录状态和token
       LocalStorage.set<bool>('login', true);
@@ -196,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
       // 替换路由
       Navigator.pushReplacementNamed(context, '/');
     } else {
-      Toast.show(loginResult.msg);
+      Toast.show('登录失败：${loginResult.msg}');
       return;
     }
 
@@ -205,45 +209,11 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _getAuthCode() async {
-    if (_validatorPhone(_phone)) {
-      Sms smsResult = await SmsApi.send(_phone);
-      if (smsResult.code == 200) {
-        Toast.show(smsResult.msg);
-      } else {
-        Toast.show(smsResult.msg);
-      }
+    Sms smsResult = await SmsApi.send(_phone);
+    if (smsResult.code == 200) {
+      Toast.show(smsResult.msg);
+    } else {
+      Toast.show(smsResult.msg);
     }
-  }
-
-  bool _validatorPhone(v) {
-    v = v.trim();
-    RegExp regExp = new RegExp(
-        r'^1(3\d|4[5-9]|5[0-35-9]|6[567]|7[0-8]|8\d|9[0-35-9])\d{8}$');
-    if (v.length == 0) {
-      Toast.show("请输入您的手机号");
-      return false;
-    }
-    if (v.length != 11 || regExp.hasMatch(v) != true) {
-      Toast.show("请检查您的手机号");
-      return false;
-    }
-    return true;
-  }
-
-  bool _validatorAuthCode(v) {
-    v = v.trim();
-    RegExp regExp = new RegExp(r"\d{6}$");
-
-    if (v.length == 0) {
-      Toast.show('请输入您的验证码');
-      return false;
-    }
-
-    if (v.length != 6 || regExp.hasMatch(v) != true) {
-      Toast.show('请检查验证码格式');
-      return false;
-    }
-
-    return true;
   }
 }

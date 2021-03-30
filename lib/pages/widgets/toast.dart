@@ -16,8 +16,8 @@ class Toast {
         offset: 20.px,
       ),
       duration: Duration(
-        seconds: 2,
-        milliseconds: 500,
+        seconds: 3,
+        // milliseconds: 500,
       ),
       textPadding: EdgeInsets.only(
         top: 7.px,

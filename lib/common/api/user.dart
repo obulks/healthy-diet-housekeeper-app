@@ -18,7 +18,8 @@ class UserApi {
       print('UserApi response: $response');
       return Login.fromJson(response.data);
     }).catchError((err) {
-      print('dio error: $err');
+      // print('dio error: $err');
+      Toast.show('请求错误：服务器维护中，登录失败');
     });
   }
 }

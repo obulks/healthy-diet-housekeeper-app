@@ -11,6 +11,7 @@ export 'package:healthy_diet_housekeeper/common/screen_adaptation/double_extensi
 export 'package:healthy_diet_housekeeper/common/store.dart';
 export 'package:healthy_diet_housekeeper/common/local_storage.dart';
 export 'package:healthy_diet_housekeeper/common/http.dart';
+export 'package:healthy_diet_housekeeper/common/validator.dart';
 export 'package:healthy_diet_housekeeper/common/api/user.dart';
 export 'package:healthy_diet_housekeeper/common/api/sms.dart';
 

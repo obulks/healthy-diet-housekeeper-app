@@ -7,10 +7,15 @@ class AuthCodeButton extends StatefulWidget {
 
   /// 用户点击时的回调函数。
   final Function onTapCallback;
+  // 接收父Widget传入的formKey和phoneController，用来获取当前输入的手机号
+  final GlobalKey<FormState> formKey;
+  final TextEditingController phoneController;
 
   AuthCodeButton({
     this.countdown: 60,
     this.onTapCallback,
+    @required this.phoneController,
+    @required this.formKey,
   });
 
   @override
@@ -81,37 +86,47 @@ class _AuthCodeButtonState extends State<AuthCodeButton> {
       padding: EdgeInsets.symmetric(vertical: 8),
 
       child: OutlineButton(
-        padding: EdgeInsets.all(0),
-        child: Text(
-          '$_verifyStr',
-          style: TextStyle(fontSize: 11.px, color: _currentColor),
-        ),
-        borderSide: BorderSide(
-          color: _currentColor,
-          style: BorderStyle.solid,
-          width: 1,
-        ),
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        highlightedBorderColor: _currentColor,
-        shape: RoundedRectangleBorder(
-          //圆角属性
-          borderRadius: BorderRadius.circular(15),
-        ),
-        // 按钮在点击后不可用
-        onPressed: _seconds == 60
-            ? () {
-                setState(() {
-                  _seconds = 60;
-                  _verifyStr = '$_seconds秒';
-                  _currentColor = _unavailableColor;
-                  _currentWidth = _unavailableWidth;
-                });
-                _startTimer();
-                widget.onTapCallback();
-              }
-            : null,
-      ),
+          padding: EdgeInsets.all(0),
+          child: Text(
+            '$_verifyStr',
+            style: TextStyle(fontSize: 11.px, color: _currentColor),
+          ),
+          borderSide: BorderSide(
+            color: _currentColor,
+            style: BorderStyle.solid,
+            width: 1,
+          ),
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          highlightedBorderColor: _currentColor,
+          shape: RoundedRectangleBorder(
+            //圆角属性
+            borderRadius: BorderRadius.circular(15),
+          ),
+          onPressed: () {
+            widget.formKey.currentState.save();
+
+            String phone = widget.phoneController.text;
+            // 验证手机号后才进行倒计时
+            if (!Validator.phone(phone)) {
+              return null;
+            }
+            if (_seconds == 60) {
+              setState(() {
+                _seconds = 60;
+                _verifyStr = '$_seconds秒';
+                _currentColor = _unavailableColor;
+                _currentWidth = _unavailableWidth;
+              });
+              _startTimer();
+              widget.onTapCallback();
+            } else {
+              // 如果倒计时已经开始，则按钮不可用
+              return null;
+            }
+          }),
     );
   }
+
+  _handleButton() {}
 }
