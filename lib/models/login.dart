@@ -1,14 +1,14 @@
 class Login {
   int code;
   String msg;
-  _Data data;
+  Data data;
 
   Login({this.code, this.msg, this.data});
 
   Login.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     msg = json['msg'];
-    data = json['data'] != null ? new _Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -22,12 +22,12 @@ class Login {
   }
 }
 
-class _Data {
+class Data {
   String token;
 
-  _Data({this.token});
+  Data({this.token});
 
-  _Data.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     token = json['token'];
   }
 

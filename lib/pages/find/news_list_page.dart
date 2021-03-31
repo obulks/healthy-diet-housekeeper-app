@@ -9,7 +9,7 @@ class NewsPage extends StatefulWidget {
 class _NewsPageState extends State<NewsPage> {
   ScrollController _scrollController;
   Timer _timer;
-  Duration durationTime = Duration(milliseconds: 400);
+  Duration _durationTime = Duration(milliseconds: 400);
   List<int> _dataList;
   bool _loadingFlag = false;
 
@@ -29,6 +29,13 @@ class _NewsPageState extends State<NewsPage> {
             physics: ClampingScrollPhysics(),
             itemCount: _dataList.length,
             itemBuilder: (context, index) {
+              // 如果是第一个widget添加顶部padding
+              if (index == 0) {
+                return Padding(
+                  padding: EdgeInsets.only(top: 8.px),
+                  child: NewsItem(),
+                );
+              }
               // 如果是最后一个widget，则在后面额外添加一个loading
               if (index == _dataList.length - 1) {
                 return Container(
@@ -77,7 +84,7 @@ class _NewsPageState extends State<NewsPage> {
   _scrollListener() {
     // 上拉加载防抖
     _timer?.cancel();
-    _timer = Timer(durationTime, () {
+    _timer = Timer(_durationTime, () {
       // 可滚动的最大距离
       double maxScrollExtent = _scrollController.position.maxScrollExtent;
       // 当前滚动的位置

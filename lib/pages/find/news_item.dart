@@ -7,8 +7,7 @@ class NewsItem extends StatelessWidget {
     SizeFit.initialize(context);
     return Container(
       padding: EdgeInsets.only(left: 16.px, right: 16.px),
-      // margin: EdgeInsets.only(top: 8.px, bottom: 8.px),
-      height: 100.px,
+      // height: 100.px,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -54,7 +53,7 @@ class NewsItem extends StatelessWidget {
                 ),
               ),
               Container(
-                width: 64.px,
+                width: 85.px,
                 height: 64.px,
                 child: LoadNetworkImage(
                   url:

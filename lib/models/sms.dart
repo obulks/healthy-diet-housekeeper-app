@@ -1,14 +1,14 @@
 class Sms {
   int code;
   String msg;
-  _Data data;
+  Data data;
 
   Sms({this.code, this.msg, this.data});
 
   Sms.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     msg = json['msg'];
-    data = json['data'] != null ? new _Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -22,12 +22,12 @@ class Sms {
   }
 }
 
-class _Data {
+class Data {
   String phone;
 
-  _Data({this.phone});
+  Data({this.phone});
 
-  _Data.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     phone = json['phone'];
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healthy_diet_housekeeper/pages/find/news_detail_page.dart';
 import 'package:healthy_diet_housekeeper/public.dart';
 
 class Demo extends StatefulWidget {
@@ -7,55 +8,31 @@ class Demo extends StatefulWidget {
 }
 
 class _DemoState extends State<Demo> {
-  LocalStorage _localStorage;
-
   @override
   Widget build(BuildContext context) {
     SizeFit.initialize(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('demo'),
+        backgroundColor: Colors.white,
+        // title: Text('demo'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Text(
-              'text',
-              style: TextStyle(
-                fontSize: 40.px,
-              ),
-            ),
-          ),
-          RaisedButton(
-            onPressed: () {
-              _saveData();
-            },
-            child: Text('set'),
-          ),
-          RaisedButton(
-            onPressed: () {
-              _getData();
-            },
-            child: Text('get'),
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Container(child: Text('demo')),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _saveData();
+          String uniquekey = 'e30d4d88c9b8977d9d39667449562752';
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => NewsDetailPage(
+                uniquekey: uniquekey,
+              ),
+            ),
+          );
         },
       ),
     );
-  }
-
-  _saveData() {
-    LocalStorage.set<bool>('login', true);
-  }
-  _getData() async {
-    // print(await _localStorage.get('login'));
-    // print(await UserApi.login('1'));
   }
 
   @override

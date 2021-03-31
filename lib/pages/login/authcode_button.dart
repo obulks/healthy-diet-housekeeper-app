@@ -54,23 +54,24 @@ class _AuthCodeButtonState extends State<AuthCodeButton> {
 
   void _startTimer() {
     _timer = Timer.periodic(
-        Duration(seconds: 1),
-        (Timer timer) => {
-              setState(() {
-                if (_seconds < 1) {
-                  _timer.cancel();
-                  _verifyStr = '获取验证码';
-                  _seconds = 60;
-                  _currentColor = _availableColor;
-                  _currentWidth = _availableWidth;
-                } else {
-                  _seconds -= 1;
-                  _verifyStr = '$_seconds秒';
-                  _currentColor = _unavailableColor;
-                  _currentWidth = _unavailableWidth;
-                }
-              })
-            });
+      Duration(seconds: 1),
+      (Timer timer) {
+        setState(() {
+          if (_seconds < 1) {
+            _timer.cancel();
+            _verifyStr = '获取验证码';
+            _seconds = 60;
+            _currentColor = _availableColor;
+            _currentWidth = _availableWidth;
+          } else {
+            _seconds -= 1;
+            _verifyStr = '$_seconds秒';
+            _currentColor = _unavailableColor;
+            _currentWidth = _unavailableWidth;
+          }
+        });
+      },
+    );
   }
 
   @override
@@ -79,54 +80,50 @@ class _AuthCodeButtonState extends State<AuthCodeButton> {
     return Container(
       width: _currentWidth,
       height: 30.px,
-      // padding: EdgeInsets.only(
-      //   top: 8.px,
-      //   bottom: 8.px,
-      // ),
       padding: EdgeInsets.symmetric(vertical: 8),
-
       child: OutlineButton(
-          padding: EdgeInsets.all(0),
-          child: Text(
-            '$_verifyStr',
-            style: TextStyle(fontSize: 11.px, color: _currentColor),
-          ),
-          borderSide: BorderSide(
-            color: _currentColor,
-            style: BorderStyle.solid,
-            width: 1,
-          ),
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          highlightedBorderColor: _currentColor,
-          shape: RoundedRectangleBorder(
-            //圆角属性
-            borderRadius: BorderRadius.circular(15),
-          ),
-          onPressed: () {
-            widget.formKey.currentState.save();
-
-            String phone = widget.phoneController.text;
-            // 验证手机号后才进行倒计时
-            if (!Validator.phone(phone)) {
-              return null;
-            }
-            if (_seconds == 60) {
-              setState(() {
-                _seconds = 60;
-                _verifyStr = '$_seconds秒';
-                _currentColor = _unavailableColor;
-                _currentWidth = _unavailableWidth;
-              });
-              _startTimer();
-              widget.onTapCallback();
-            } else {
-              // 如果倒计时已经开始，则按钮不可用
-              return null;
-            }
-          }),
+        padding: EdgeInsets.all(0),
+        child: Text(
+          '$_verifyStr',
+          style: TextStyle(fontSize: 11.px, color: _currentColor),
+        ),
+        borderSide: BorderSide(
+          color: _currentColor,
+          style: BorderStyle.solid,
+          width: 1,
+        ),
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        highlightedBorderColor: _currentColor,
+        shape: RoundedRectangleBorder(
+          //圆角属性
+          borderRadius: BorderRadius.circular(15),
+        ),
+        onPressed: _handleButtonClick,
+      ),
     );
   }
 
-  _handleButton() {}
+  _handleButtonClick() {
+    widget.formKey.currentState.save();
+    String phone = widget.phoneController.text;
+
+    // 验证手机号后才进行倒计时
+    if (!Validator.phone(phone)) {
+      return null;
+    }
+    if (_seconds == 60) {
+      setState(() {
+        _seconds = 60;
+        _verifyStr = '$_seconds秒';
+        _currentColor = _unavailableColor;
+        _currentWidth = _unavailableWidth;
+      });
+      _startTimer();
+      widget.onTapCallback();
+    } else {
+      // 如果倒计时已经开始，则按钮不可用
+      return null;
+    }
+  }
 }

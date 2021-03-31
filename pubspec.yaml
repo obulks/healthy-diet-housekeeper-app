@@ -24,6 +24,7 @@ dependencies:
   nine_grid_view: ^1.0.5
   nineold: ^1.3.3
   oktoast: ^3.0.0
+  flutter_html: ^1.3.0
 
 dev_dependencies:
   flutter_test:

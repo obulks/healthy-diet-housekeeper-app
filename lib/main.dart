@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_diet_housekeeper/public.dart';
-// import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() {
   runApp(
@@ -49,6 +48,7 @@ class App extends StatelessWidget {
           '/food': (context) => FoodPage(),
           '/find': (context) => FindPage(),
           '/me': (context) => MePage(),
+          '/demo': (context) => Demo(),
         },
       ),
     );

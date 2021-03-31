@@ -3,7 +3,7 @@ import 'package:healthy_diet_housekeeper/public.dart';
 class SmsApi {
   static final String _baseUrl = 'http://192.168.1.101:3000/sms';
 
-  static Future send(String phone) async {
+  static Future<Sms> send(String phone) async {
     Dio dio = new Dio();
 
     dio.options.headers = {

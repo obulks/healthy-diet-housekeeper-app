@@ -9,7 +9,7 @@ class AppHomeScreen extends StatefulWidget {
 
 class _AppHomeScreenState extends State<AppHomeScreen> {
   int _tabIndex = 0;
-  bool _isLogin;
+  bool _isLogin = false;
   List<List<Image>> _tabImages;
   List<String> _appBarTitles = ['首页', '食材', '', '发现', '我的'];
   List<Widget> _pageList;

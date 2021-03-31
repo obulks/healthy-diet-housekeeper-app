@@ -64,11 +64,7 @@ class _MePageState extends State<MePage> {
                 color: Colors.white,
               ),
               onTap: () {
-                Navigator.pushNamed(context, '/login');
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Demo()),
-                );
+                Navigator.pushNamed(context, '/demo');
                 print('message tap');
               },
             ),
