@@ -14,10 +14,18 @@ class _DemoState extends State<Demo> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        // title: Text('demo'),
+        title: Text('title'),
+        elevation: 0,
       ),
       body: SingleChildScrollView(
-        child: Container(child: Text('demo')),
+        child: Column(
+          children: [
+            FoodItem2(),
+            FoodItem2(),
+            FoodItem2(),
+            FoodItem2(),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -40,3 +48,74 @@ class _DemoState extends State<Demo> {
     super.initState();
   }
 }
+
+class FoodItem2 extends StatelessWidget {
+  // final Foods food;
+
+  @override
+  Widget build(BuildContext context) {
+    SizeFit.initialize(context);
+    return GestureDetector(
+      onTap: () => _toFoodDetailPage(),
+      child: Card(
+        elevation: 4.0,
+        // margin: EdgeInsets.symmetric(
+        //   horizontal: 10.0,
+        //   vertical: 6.0,
+        // ),
+        child: Container(
+          // height: 64.0,
+          decoration: BoxDecoration(
+            color: Colors.white70,
+          ),
+          child: ListTile(
+            // contentPadding:
+            // EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            leading: Container(
+              padding: EdgeInsets.only(right: 12.0),
+              decoration: BoxDecoration(
+                border: Border(
+                  right: BorderSide(
+                    width: 1.0,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+              child: Icon(
+                Icons.autorenew,
+                color: Colors.grey,
+              ),
+            ),
+            title: Text(
+              "苹果",
+              style: TextStyle(
+                color: Colors.black54,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            // subtitle: Text("中级", style: TextStyle(color: Colors.white)),
+            subtitle: Row(
+              children: <Widget>[
+                Text(
+                  "100毫克",
+                  style: TextStyle(color: Colors.black54),
+                ),
+              ],
+            ),
+            trailing: Icon(
+              Icons.keyboard_arrow_right,
+              color: Colors.black54,
+              size: 30.0,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  _toFoodDetailPage() {
+    print('to food detail page');
+  }
+}
+
+

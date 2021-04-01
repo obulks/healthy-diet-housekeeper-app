@@ -2,30 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:healthy_diet_housekeeper/public.dart';
 
 class FoodGroupPanel extends StatelessWidget {
-  final List<String> foodGroups = [
-    '谷类',
-    '薯类',
-    '豆类',
-    '蔬菜',
-    '菌类',
-    '藻类',
-    '水果',
-    '坚果',
-    '畜肉',
-    '禽肉',
-    '乳类',
-    '蛋类',
-    '河海鲜',
-    '茶类',
-    '酒类',
-    '油类',
-    '调味品类',
-    '零食饮料'
+  // 每个子列表第一项为显示在前端的文本，第二项为查询时需要的食品类型关键字
+  final List<List<String>> foodGroups = [
+    ['谷类', '谷类'],
+    ['薯类', '薯类淀粉'],
+    ['豆类', '干豆类'],
+    ['蔬菜', '蔬菜类'],
+    ['菌类', '菌藻类'],
+    ['藻类', '菌藻类'],
+    ['水果', '水果类'],
+    ['坚果', '坚果种子'],
+    ['畜肉', '畜肉类'],
+    ['禽肉', '禽肉类'],
+    ['乳类', '乳类'],
+    ['蛋类', '蛋类'],
+    ['河海鲜', '鱼虾蟹贝'],
+    ['饮料', '软饮料'],
+    ['酒类', '酒精饮料'],
+    ['油类', '油脂类'],
+    ['调味品', '调味品类'],
+    ['小吃甜饼', '小吃甜饼'],
   ];
 
-  var icons;
+  List<Image> icons;
 
-  initData() {
+  _initResources() {
     icons = [
       Image.asset('assets/icons/food_group/1gulei.png',
           width: 22.px, height: 22.px),
@@ -69,7 +70,7 @@ class FoodGroupPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeFit.initialize(context);
-    initData();
+    _initResources();
     return Container(
       height: 680.px,
       margin: EdgeInsets.all(16.px),
@@ -86,11 +87,14 @@ class FoodGroupPanel extends StatelessWidget {
           borderRadius: BorderRadius.circular(4.px)),
       child: Column(
         children: [
-          Text('食物分类', style: TextStyle(
-            fontSize: 13.px,
-            fontWeight: FontWeight.w500,
-            color: Color(0xff222222),
-          ),),
+          Text(
+            '食物分类',
+            style: TextStyle(
+              fontSize: 13.px,
+              fontWeight: FontWeight.w500,
+              color: Color(0xff222222),
+            ),
+          ),
           SizedBox(height: 4.px),
           Divider(),
           SizedBox(height: 4.px),
@@ -105,9 +109,8 @@ class FoodGroupPanel extends StatelessWidget {
                 foodGroups.length,
                 (index) {
                   return GestureDetector(
-                    onTap: () {
-                      print('tap: ${foodGroups[index]}');
-                    },
+                    onTap: () => _toFoodListPage(
+                        context, foodGroups[index][0], foodGroups[index][1]),
                     child: Container(
                       child: Column(
                         children: [
@@ -124,11 +127,15 @@ class FoodGroupPanel extends StatelessWidget {
                             ),
                             child: icons[index],
                           ),
-                          SizedBox(height: 4.px,),
+                          SizedBox(
+                            height: 4.px,
+                          ),
                           Text(
-                            '${foodGroups[index]}',
+                            '${foodGroups[index][0]}',
                             style: TextStyle(
-                                fontSize: 13.px, color: Color(0xff222222)),
+                              fontSize: 13.px,
+                              color: Color(0xff222222),
+                            ),
                           )
                         ],
                       ),
@@ -139,6 +146,19 @@ class FoodGroupPanel extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  _toFoodListPage(BuildContext context, String title, String foodType) {
+    print('tap: $foodType');
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FoodListPage(
+          foodType: foodType,
+          title: title,
+        ),
       ),
     );
   }

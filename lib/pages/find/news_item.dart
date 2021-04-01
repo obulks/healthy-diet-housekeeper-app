@@ -12,17 +12,7 @@ class NewsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeFit.initialize(context);
     return GestureDetector(
-      onTap: () {
-        print(news.uniquekey);
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => NewsDetailPage(
-              uniquekey: news.uniquekey,
-            ),
-          ),
-        );
-      },
+      onTap: () => _toNewsDetailPage(context, news.uniquekey),
       child: Container(
         padding: EdgeInsets.only(left: 16.px, right: 16.px),
         // height: 100.px,
@@ -85,6 +75,17 @@ class NewsItem extends StatelessWidget {
             ),
             Divider(),
           ],
+        ),
+      ),
+    );
+  }
+
+  _toNewsDetailPage(BuildContext context, String uniquekey) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => NewsDetailPage(
+          uniquekey: uniquekey,
         ),
       ),
     );
