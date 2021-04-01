@@ -3,7 +3,7 @@ import 'package:healthy_diet_housekeeper/public.dart';
 import 'package:healthy_diet_housekeeper/models/news_detail.dart';
 
 class NewsDetailPage extends StatefulWidget {
-  String uniquekey;
+  final String uniquekey;
 
   NewsDetailPage({
     @required this.uniquekey,

@@ -22,8 +22,7 @@ export 'package:healthy_diet_housekeeper/common/api/news.dart';
 export 'package:healthy_diet_housekeeper/models/user.dart';
 export 'package:healthy_diet_housekeeper/models/sms.dart' hide Data;
 export 'package:healthy_diet_housekeeper/models/login.dart' hide Data;
-export 'package:healthy_diet_housekeeper/models/news_list_page.dart'
-    hide Data, News;
+export 'package:healthy_diet_housekeeper/models/news_list.dart' hide Data;
 export 'package:healthy_diet_housekeeper/models/news_detail.dart'
     hide Data, Detail;
 
@@ -34,6 +33,7 @@ export 'package:healthy_diet_housekeeper/pages/food/food_page.dart';
 export 'package:healthy_diet_housekeeper/pages/find/find_page.dart';
 export 'package:healthy_diet_housekeeper/pages/find/recommend_page.dart';
 export 'package:healthy_diet_housekeeper/pages/find/news_list_page.dart';
+export 'package:healthy_diet_housekeeper/pages/find/news_detail_page.dart';
 export 'package:healthy_diet_housekeeper/pages/login/login_page.dart';
 export 'package:healthy_diet_housekeeper/pages/me/me_page.dart';
 export 'package:healthy_diet_housekeeper/pages/demo/demo.dart';
@@ -66,3 +66,4 @@ export 'package:dio/dio.dart' hide VoidCallback;
 export 'package:oktoast/oktoast.dart';
 export 'package:flutter_html/flutter_html.dart';
 export 'package:flutter_html/style.dart';
+export 'package:collection/collection.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:healthy_diet_housekeeper/public.dart';
 
 class Toast {
-  static void show(String msg) {
+  static void show(String msg, {double offset}) {
     showToast(
       msg,
       backgroundColor: Colors.black54,
@@ -13,7 +13,7 @@ class Toast {
       ),
       position: ToastPosition(
         align: Alignment.topCenter,
-        offset: 20.px,
+        offset: offset ?? 20.px,
       ),
       duration: Duration(
         seconds: 3,

@@ -203,9 +203,6 @@ class _LoginPageState extends State<LoginPage> {
       Toast.show('登录失败：${loginResult.msg}');
       return;
     }
-
-    print('login_page: login');
-    Toast.show('登录成功');
   }
 
   _getAuthCode() async {
