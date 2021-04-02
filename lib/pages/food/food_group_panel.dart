@@ -151,7 +151,6 @@ class FoodGroupPanel extends StatelessWidget {
   }
 
   _toFoodListPage(BuildContext context, String title, String foodType) {
-    print('tap: $foodType');
     Navigator.push(
       context,
       MaterialPageRoute(

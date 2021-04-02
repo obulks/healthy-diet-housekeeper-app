@@ -24,7 +24,7 @@ class AuthCodeButton extends StatefulWidget {
 
 class _AuthCodeButtonState extends State<AuthCodeButton> {
   Color _availableColor = Color(0xff3fdabf);
-  Color _unavailableColor = Color(0xffA6ADBE);
+  Color _unavailableColor = Color(0xffCCCCCC);
   double _availableWidth = 80.px;
   double _unavailableWidth = 50.px;
 

@@ -12,7 +12,11 @@ class FoodItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        margin: EdgeInsets.only(top: 8.px, left: 8.px, right: 8.px),
+        margin: EdgeInsets.only(
+          top: 8.px,
+          left: 8.px,
+          right: 8.px,
+        ),
         width: double.infinity,
         height: 64.px,
         decoration: BoxDecoration(
@@ -37,7 +41,6 @@ class FoodItem extends StatelessWidget {
                     food.name,
                     style: TextStyle(
                       color: Colors.black54,
-                      fontWeight: FontWeight.w500,
                       fontSize: 14.px,
                     ),
                   ),
@@ -58,17 +61,23 @@ class FoodItem extends StatelessWidget {
               padding: EdgeInsets.only(right: 8.px),
               child: Icon(
                 Icons.keyboard_arrow_right,
-                color: Colors.black54,
+                color: Colors.black38,
                 size: 20.px,
               ),
             ),
           ],
         ),
       ),
-      onTap: () => _toFoodDetail(),
+      onTap: () => _toFoodDetail(context, food),
     );
   }
 
-  _toFoodDetail() {
+  _toFoodDetail(BuildContext context, Foods food) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FoodDetailPage(food: food),
+      ),
+    );
   }
 }

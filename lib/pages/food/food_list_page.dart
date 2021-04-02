@@ -3,8 +3,8 @@ import 'package:healthy_diet_housekeeper/common/api/food.dart';
 import 'package:healthy_diet_housekeeper/public.dart';
 
 class FoodListPage extends StatefulWidget {
-  String foodType;
-  String title;
+  final String foodType;
+  final String title;
 
   FoodListPage({
     @required this.foodType,
@@ -28,7 +28,6 @@ class _FoodListPageState extends State<FoodListPage> {
     SizeFit.initialize(context);
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: Colors.white,
         title: Text(
           widget.title,
           style: TextStyle(
@@ -53,7 +52,7 @@ class _FoodListPageState extends State<FoodListPage> {
             child: _foodList == null
                 ? Center(
                     child: CircularProgressIndicator(
-                      valueColor: new AlwaysStoppedAnimation<Color>(
+                      valueColor: AlwaysStoppedAnimation<Color>(
                         Theme.of(context).primaryColor,
                       ),
                     ),
@@ -71,13 +70,20 @@ class _FoodListPageState extends State<FoodListPage> {
                             children: [
                               FoodItem(food: _foodList[index]),
                               Center(
-                                child: Opacity(
-                                  opacity: _loadingFlag ? 0 : 1,
-                                  child: SpinKitThreeBounce(
-                                    color: Theme.of(context).primaryColor,
-                                    size: 24.px,
-                                  ),
-                                ),
+                                child: () {
+                                  return _loadingFlag
+                                      ? Container(
+                                          height: 24.px,
+                                          child: SpinKitThreeBounce(
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                            size: 24.px,
+                                          ),
+                                        )
+                                      : Container(
+                                          height: 24.px,
+                                        );
+                                }(),
                               ),
                             ],
                           ),
@@ -122,40 +128,41 @@ class _FoodListPageState extends State<FoodListPage> {
     if (foodListResult.code == 200) {
       setState(() {
         _foodList = foodListResult.data.foods;
+        _initPage();
       });
     } else {
-      Toast.show('获取失败', offset: 128.px);
+      Toast.show('请求数据失败');
       setState(() {
         _foodList = null;
-        _initPage();
       });
     }
   }
 
-  Future<void> _loadingData() async {
+  Future<void> _loadData() async {
     int page = _page + 1;
 
-    if (page > 50) {
-      Toast.show('已经到最底了');
-      return;
-    }
-    FoodList foodListResult = await FoodApi.getFoodList(widget.foodType, 1);
-    Iterable<Foods> foodData = List.generate(foodListResult.data.foods.length,
-        (index) => foodListResult.data.foods[index]);
+    FoodList foodListResult = await FoodApi.getFoodList(widget.foodType, page);
     if (foodListResult.code == 200) {
+      Iterable<Foods> foodData = List.generate(foodListResult.data.foods.length,
+          (index) => foodListResult.data.foods[index]);
       setState(() {
         _foodList.addAll(foodData);
         _page += 1;
       });
+    } else if (foodListResult.code == 210) {
+      Toast.show('已经到最底了');
+      setState(() {
+        _loadingFlag = false;
+      });
     } else {
-      Toast.show('请求数据失败', offset: 128.px);
+      Toast.show('请求数据失败');
     }
   }
 
   // 上拉加载防抖
   _scrollListener() {
     _timer?.cancel();
-    _timer = Timer(_durationTime, () {
+    _timer = Timer(_durationTime, () async {
       // 可滚动的最大距离
       double maxScrollExtent = _scrollController.position.maxScrollExtent;
       // 当前滚动的位置
@@ -166,7 +173,7 @@ class _FoodListPageState extends State<FoodListPage> {
         setState(() {
           _loadingFlag = true;
         });
-        _loadingData();
+        await _loadData();
         setState(() {
           _loadingFlag = false;
         });
@@ -188,7 +195,7 @@ class _FoodListPageState extends State<FoodListPage> {
       setState(() {
         _foodList = [];
       });
-      Toast.show('请求数据失败', offset: 128.px);
+      Toast.show('请求数据失败');
     }
     return null;
   }

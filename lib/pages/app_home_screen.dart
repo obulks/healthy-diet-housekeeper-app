@@ -9,7 +9,7 @@ class AppHomeScreen extends StatefulWidget {
 
 class _AppHomeScreenState extends State<AppHomeScreen> {
   int _tabIndex = 0;
-  bool _isLogin = false;
+  bool _isLogin;
   List<List<Image>> _tabImages;
   List<String> _appBarTitles = ['首页', '食材', '', '发现', '我的'];
   List<Widget> _pageList;
@@ -21,13 +21,30 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
     SizeFit.initialize(context);
     _initResources();
     // 如果未登录则加载登录页
-    return _isLogin == true ? _appHomeScreenWidget() : LoginPage();
+    // return _isLogin == null ? LoginPage() : _appHomeScreen();
+    return () {
+      if (_isLogin == null) {
+        return Scaffold(
+          body: Center(
+            child: Text('loading...'),
+          ),
+        );
+      } else {
+        return _isLogin == true ? _appHomeScreen() : LoginPage();
+      }
+    }();
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _validateLogin();
+  }
+
+  // @override
+
   Future _validateLogin() async {
-    // LocalStorage.clear();
     var result = await LocalStorage.get('login');
-    print('app_home_screen.dart result: $result');
 
     if (result == true) {
       setState(() {
@@ -91,13 +108,7 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
   static const FloatingActionButtonLocation centerDocked =
       _CenterDockedFloatingActionButtonLocation();
 
-  @override
-  void initState() {
-    super.initState();
-    _validateLogin();
-  }
-
-  Widget _appHomeScreenWidget() {
+  Widget _appHomeScreen() {
     return Scaffold(
       key: _bottomSheetScaffoldKey,
       body: _pageList[_tabIndex],

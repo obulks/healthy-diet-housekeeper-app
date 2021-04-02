@@ -88,17 +88,18 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         '单位：千卡',
                         style: TextStyle(
-                            fontSize: 11.px,
-                            color: Colors.black26,
-                            fontWeight: FontWeight.w500),
+                          fontSize: 11.px,
+                          color: Colors.black26,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                     Positioned(
-                      top: 16.px,
+                      top: 20.px,
                       left: 122.px,
                       child: CircularPercentIndicator(
                         radius: 100.px,
-                        lineWidth: 12.px,
+                        lineWidth: 10.px,
                         animation: true,
                         animationDuration: 800,
                         percent: () {

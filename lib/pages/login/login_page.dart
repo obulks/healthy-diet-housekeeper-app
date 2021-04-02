@@ -200,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
       // 替换路由
       Navigator.pushReplacementNamed(context, '/');
     } else {
-      Toast.show('登录失败：${loginResult.msg}');
+      Toast.show('登录失败：${loginResult.msg}', offset: 20.px);
       return;
     }
   }

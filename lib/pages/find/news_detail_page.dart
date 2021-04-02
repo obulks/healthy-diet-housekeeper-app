@@ -16,6 +16,7 @@ class NewsDetailPage extends StatefulWidget {
 class _NewsDetailPageState extends State<NewsDetailPage> {
   @override
   Widget build(BuildContext context) {
+    SizeFit.initialize(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -26,11 +27,26 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
           builder: (BuildContext context, AsyncSnapshot<NewsDetail> snap) {
             if (snap.connectionState == ConnectionState.active ||
                 snap.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: CircularProgressIndicator(),
+              return Container(
+                padding: EdgeInsets.only(top: 20.px),
+                child: Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).primaryColor,
+                    ),
+                  ),
+                ),
               );
             }
             if (snap.connectionState == ConnectionState.done) {
+              if (snap.data.code == 400) {
+                return Container(
+                  child: Text(
+                    '服务器暂查询不到此新闻详情，请过一段时间再来',
+                  ),
+                );
+              }
+              print(snap.data.data.detail);
               return Container(
                 child: Html(
                   data: '''

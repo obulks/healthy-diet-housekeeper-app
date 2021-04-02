@@ -15,7 +15,7 @@ class NewsApi {
       return NewsList.fromJson(response.data);
     }).catchError((err) {
       print('dio error: $err');
-      Toast.show('获取数据失败');
+      Toast.show('请求发生了错误');
     });
   }
 
@@ -32,7 +32,7 @@ class NewsApi {
       return NewsDetail.fromJson(response.data);
     }).catchError((err) {
       print('dio error: $err');
-      Toast.show('获取数据失败');
+      Toast.show('请求发生了错误');
     });
   }
 }

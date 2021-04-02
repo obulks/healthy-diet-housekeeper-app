@@ -13,7 +13,7 @@ class Toast {
       ),
       position: ToastPosition(
         align: Alignment.topCenter,
-        offset: offset ?? 20.px,
+        offset: offset ?? 128.px,
       ),
       duration: Duration(
         seconds: 3,

@@ -54,13 +54,19 @@ class _NewsPageState extends State<NewsPage> {
                           children: [
                             NewsItem(_newsList[index]),
                             Center(
-                              child: Opacity(
-                                opacity: _loadingFlag ? 0 : 1,
-                                child: SpinKitThreeBounce(
-                                  color: Theme.of(context).primaryColor,
-                                  size: 24.px,
-                                ),
-                              ),
+                              child: () {
+                                return _loadingFlag
+                                    ? Container(
+                                        height: 24.px,
+                                        child: SpinKitThreeBounce(
+                                          color: Theme.of(context).primaryColor,
+                                          size: 24.px,
+                                        ),
+                                      )
+                                    : Container(
+                                        height: 24.px,
+                                      );
+                              }(),
                             ),
                           ],
                         ),
@@ -93,7 +99,7 @@ class _NewsPageState extends State<NewsPage> {
   }
 
   _initPage() {
-    _page = 1;
+    _page = 2;
     _pageSize = 30;
   }
 
@@ -118,23 +124,23 @@ class _NewsPageState extends State<NewsPage> {
     if (newsListResult.code == 200) {
       // 如果获取的数据与原来的一样则提示用户
       if (_equality(_newsList, newsListResult.data.news)) {
-        Toast.show('已是最新', offset: 128.px);
-        return;
+        Toast.show('已是最新');
       }
       setState(() {
         _newsList = newsListResult.data.news;
+        _loadingFlag = false;
+        _initPage();
       });
     } else {
-      Toast.show('获取失败', offset: 128.px);
+      Toast.show('获取失败');
       setState(() {
         _newsList = null;
-        _initPage();
       });
     }
   }
 
   // 上拉加载更多
-  Future<void> _loadingData() async {
+  Future<void> _loadData() async {
     int page = _page + 1;
     int pageSize = _pageSize;
 
@@ -143,22 +149,23 @@ class _NewsPageState extends State<NewsPage> {
       return;
     }
     NewsList newsListResult = await NewsApi.getNewsList(page, pageSize);
-    Iterable<News> newData =
-        List.generate(pageSize, (index) => newsListResult.data.news[index]);
+    print(_page);
     if (newsListResult.code == 200) {
+      Iterable<News> newData =
+          List.generate(pageSize, (index) => newsListResult.data.news[index]);
       setState(() {
         _newsList.addAll(newData);
         _page += 1;
       });
     } else {
-      Toast.show('请求数据失败', offset: 128.px);
+      Toast.show('请求数据失败');
     }
   }
 
   // 上拉加载防抖
   _scrollListener() {
     _timer?.cancel();
-    _timer = Timer(_durationTime, () {
+    _timer = Timer(_durationTime, () async {
       // 可滚动的最大距离
       double maxScrollExtent = _scrollController.position.maxScrollExtent;
       // 当前滚动的位置
@@ -169,7 +176,7 @@ class _NewsPageState extends State<NewsPage> {
         setState(() {
           _loadingFlag = true;
         });
-        _loadingData();
+        await _loadData();
         setState(() {
           _loadingFlag = false;
         });
@@ -191,7 +198,7 @@ class _NewsPageState extends State<NewsPage> {
       setState(() {
         _newsList = [];
       });
-      Toast.show('请求数据失败', offset: 128.px);
+      Toast.show('请求数据失败');
     }
     return null;
   }
