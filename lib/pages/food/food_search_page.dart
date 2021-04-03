@@ -11,6 +11,8 @@ class _FoodSearchPageState extends State<FoodSearchPage> {
   List<Foods> _foodList = [];
   Timer _timer;
   Duration _durationTime = Duration(milliseconds: 500);
+  ScrollController _scrollController = new ScrollController();
+  Duration _scrollDurationTime = Duration(milliseconds: 1000);
   // 用来判断搜索是否有结果
   bool _searchResult = true;
 
@@ -44,6 +46,7 @@ class _FoodSearchPageState extends State<FoodSearchPage> {
                     }
                   }()
                 : ListView.builder(
+                    controller: _scrollController,
                     itemCount: _foodList.length,
                     itemBuilder: (BuildContext context, int index) {
                       return SearchItem(food: _foodList[index]);
@@ -58,11 +61,18 @@ class _FoodSearchPageState extends State<FoodSearchPage> {
   @override
   void initState() {
     super.initState();
+    _scrollController.addListener(_scrollListener);
   }
 
   void dispose() {
     super.dispose();
     _timer?.cancel();
+    _scrollController.dispose();
+  }
+
+  _scrollListener() {
+    // 有待优化，应该使用一个立即执行的防抖函数
+    FocusScope.of(context).requestFocus(FocusNode());
   }
 
   _onSearch(value) {
@@ -77,7 +87,7 @@ class _FoodSearchPageState extends State<FoodSearchPage> {
         _timer?.cancel();
       });
     } else {
-      // 请求防抖
+      // 对请求进行防抖处理
       _timer?.cancel();
       _timer = Timer(_durationTime, () async {
         _fetch(value);
@@ -106,7 +116,9 @@ class _FoodSearchPageState extends State<FoodSearchPage> {
 
   void _onClear() {
     setState(() {
+      _foodList = [];
       _searchResult = true;
+      _timer?.cancel();
     });
   }
 }

@@ -33,6 +33,7 @@ class _HomePageState extends State<HomePage> {
     _initData();
     return Scaffold(
       appBar: AppBar(
+        brightness: Brightness.dark,
         elevation: 0,
         title: Text(
           '首页',

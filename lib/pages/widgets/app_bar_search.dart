@@ -154,6 +154,7 @@ class _AppBarSearchState extends State<AppBarSearch> {
     // double right = isActionEmpty && !isFocus && isTextEmpty ? 15 : 0;
     return AppBar(
       automaticallyImplyLeading: false,
+      brightness: Brightness.dark,
       elevation: 0,
       titleSpacing: 0,
       // leading: widget.leading,

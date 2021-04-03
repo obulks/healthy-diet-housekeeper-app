@@ -41,7 +41,7 @@ class SearchItem extends StatelessWidget {
   }
 
   _toFoodDetail(BuildContext context, Foods food) {
-    print('to');
+    FocusScope.of(context).requestFocus(FocusNode());
     Navigator.push(
       context,
       CupertinoPageRoute(

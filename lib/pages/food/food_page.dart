@@ -13,6 +13,7 @@ class _FoodPageState extends State<FoodPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        brightness: Brightness.dark,
         title: Text(
           '食物成分查询',
           style: TextStyle(

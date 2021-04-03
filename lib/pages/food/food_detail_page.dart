@@ -20,6 +20,7 @@ class FoodDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        brightness: Brightness.dark,
         title: Text(
           '${food.name}',
           style: TextStyle(

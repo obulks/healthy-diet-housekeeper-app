@@ -20,6 +20,7 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        brightness: Brightness.dark,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),

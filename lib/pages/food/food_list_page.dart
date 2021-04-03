@@ -27,6 +27,8 @@ class _FoodListPageState extends State<FoodListPage> {
     SizeFit.initialize(context);
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        brightness: Brightness.dark,
         title: Text(
           widget.title,
           style: TextStyle(
@@ -34,7 +36,6 @@ class _FoodListPageState extends State<FoodListPage> {
             fontSize: 19.px,
           ),
         ),
-        elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),

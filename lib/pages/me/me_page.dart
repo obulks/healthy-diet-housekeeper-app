@@ -38,6 +38,7 @@ class _MePageState extends State<MePage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        brightness: Brightness.dark,
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 16.px),
