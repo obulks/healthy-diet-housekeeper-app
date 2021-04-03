@@ -18,4 +18,19 @@ class FoodApi {
       Toast.show('请求发生了错误');
     });
   }
+
+  static Future<FoodList> searchFood(String word) {
+    Dio dio = new Dio();
+
+    Map<String, dynamic> query = {
+      'word': word,
+    };
+
+    return dio.get('$_baseUrl', queryParameters: query).then((response) {
+      return FoodList.fromJson(response.data);
+    }).catchError((err) {
+      print('dio error: $err');
+      Toast.show('请求发生了错误');
+    });
+  }
 }

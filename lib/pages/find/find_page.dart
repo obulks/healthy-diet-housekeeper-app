@@ -14,7 +14,7 @@ class _FindPageState extends State<FindPage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          elevation: 2,
+          elevation: 0,
           title: Text(
             '发现',
             style: TextStyle(

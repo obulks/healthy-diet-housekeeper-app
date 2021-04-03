@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:healthy_diet_housekeeper/public.dart';
 
 class CustomSearchDelegate extends SearchDelegate<String> {
-
   @override
   String get searchFieldLabel => '请输入食物名称进行搜索';
 
   @override
   TextStyle get searchFieldStyle => TextStyle(
-    fontSize: 15.px,
-    fontWeight: FontWeight.normal,
-    color: Colors.white,
-  );
+      // fontSize: 15.px,
+      // fontWeight: FontWeight.normal,
+      // color: Colors.white,
+      );
 
   @override
   TextInputType get keyboardType => TextInputType.text;
 
+  /*
   @override
   ThemeData appBarTheme(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -31,12 +31,13 @@ class CustomSearchDelegate extends SearchDelegate<String> {
       ),
     );
   }
+   */
 
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        tooltip: '清除输入的文字',
+        tooltip: '清除',
         icon: const Icon(Icons.clear),
         onPressed: () {
           query = '';

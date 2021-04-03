@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_diet_housekeeper/common/api/food.dart';
 import 'package:healthy_diet_housekeeper/public.dart';
 
 class FoodListPage extends StatefulWidget {
@@ -44,56 +43,50 @@ class _FoodListPageState extends State<FoodListPage> {
       body: RefreshIndicator(
         color: Theme.of(context).primaryColor,
         onRefresh: _refreshData,
-        child: ScrollConfiguration(
-          behavior: ScrollBehavior(),
-          child: GlowingOverscrollIndicator(
-            color: Theme.of(context).primaryColor,
-            axisDirection: AxisDirection.down,
-            child: _foodList == null
-                ? Center(
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        Theme.of(context).primaryColor,
-                      ),
+        child: MyScrollConfiguration(
+          child: _foodList == null
+              ? Center(
+                  child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).primaryColor,
                     ),
-                  )
-                : ListView.builder(
-                    controller: _scrollController,
-                    physics: ClampingScrollPhysics(),
-                    itemCount: _foodList.length,
-                    itemBuilder: (context, index) {
-                      // 如果是最后一个widget，则在后面额外添加一个loading
-                      if (index == _foodList.length - 1) {
-                        return Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              FoodItem(food: _foodList[index]),
-                              Center(
-                                child: () {
-                                  return _loadingFlag
-                                      ? Container(
-                                          height: 24.px,
-                                          child: SpinKitThreeBounce(
-                                            color:
-                                                Theme.of(context).primaryColor,
-                                            size: 24.px,
-                                          ),
-                                        )
-                                      : Container(
-                                          height: 24.px,
-                                        );
-                                }(),
-                              ),
-                            ],
-                          ),
-                        );
-                      } else {
-                        return FoodItem(food: _foodList[index]);
-                      }
-                    },
                   ),
-          ),
+                )
+              : ListView.builder(
+                  controller: _scrollController,
+                  physics: ClampingScrollPhysics(),
+                  itemCount: _foodList.length,
+                  itemBuilder: (context, index) {
+                    // 如果是最后一个widget，则在后面额外添加一个loading
+                    if (index == _foodList.length - 1) {
+                      return Container(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            FoodItem(food: _foodList[index]),
+                            Center(
+                              child: () {
+                                return _loadingFlag
+                                    ? Container(
+                                        height: 24.px,
+                                        child: SpinKitThreeBounce(
+                                          color: Theme.of(context).primaryColor,
+                                          size: 24.px,
+                                        ),
+                                      )
+                                    : Container(
+                                        height: 24.px,
+                                      );
+                              }(),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      return FoodItem(food: _foodList[index]);
+                    }
+                  },
+                ),
         ),
       ),
     );

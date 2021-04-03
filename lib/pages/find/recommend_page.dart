@@ -32,40 +32,35 @@ class _RecommendPageState extends State<RecommendPage> {
       ),
       body: RefreshIndicator(
         onRefresh: _refreshData,
-        child: ScrollConfiguration(
-          behavior: ScrollBehavior(),
-          child: GlowingOverscrollIndicator(
-            color: Theme.of(context).primaryColor,
-            axisDirection: AxisDirection.down,
-            child: ListView.builder(
-              controller: _scrollController,
-              physics: ClampingScrollPhysics(),
-              itemCount: _dataList.length,
-              itemBuilder: (context, index) {
-                // 如果是最后一个widget，则在后面额外添加一个loading
-                if (index == _dataList.length - 1) {
-                  return Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        PostCard(),
-                        Center(
-                          child: Opacity(
-                            opacity: _loadingFlag ? 0 : 1,
-                            child: SpinKitThreeBounce(
-                              color: Theme.of(context).primaryColor,
-                              size: 24.px,
-                            ),
+        child: MyScrollConfiguration(
+          child: ListView.builder(
+            controller: _scrollController,
+            physics: ClampingScrollPhysics(),
+            itemCount: _dataList.length,
+            itemBuilder: (context, index) {
+              // 如果是最后一个widget，则在后面额外添加一个loading
+              if (index == _dataList.length - 1) {
+                return Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      PostCard(),
+                      Center(
+                        child: Opacity(
+                          opacity: _loadingFlag ? 0 : 1,
+                          child: SpinKitThreeBounce(
+                            color: Theme.of(context).primaryColor,
+                            size: 24.px,
                           ),
                         ),
-                      ],
-                    ),
-                  );
-                } else {
-                  return PostCard();
-                }
-              },
-            ),
+                      ),
+                    ],
+                  ),
+                );
+              } else {
+                return PostCard();
+              }
+            },
           ),
         ),
       ),

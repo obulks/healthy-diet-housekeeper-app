@@ -3,6 +3,7 @@ export 'dart:async';
 export 'dart:convert';
 export 'package:flutter/painting.dart';
 export 'package:flutter/services.dart';
+export 'package:flutter/cupertino.dart';
 
 // common
 export 'package:healthy_diet_housekeeper/common/screen_adaptation/size_fit.dart';
@@ -10,16 +11,17 @@ export 'package:healthy_diet_housekeeper/common/screen_adaptation/int_extension.
 export 'package:healthy_diet_housekeeper/common/screen_adaptation/double_extension.dart';
 export 'package:healthy_diet_housekeeper/common/store.dart';
 export 'package:healthy_diet_housekeeper/common/local_storage.dart';
-export 'package:healthy_diet_housekeeper/common/http.dart';
 export 'package:healthy_diet_housekeeper/common/validator.dart';
+export 'package:healthy_diet_housekeeper/common/my_scroll_configuration.dart';
+export 'package:healthy_diet_housekeeper/common/fade_route.dart';
 
 // api
 export 'package:healthy_diet_housekeeper/common/api/user.dart';
 export 'package:healthy_diet_housekeeper/common/api/sms.dart';
 export 'package:healthy_diet_housekeeper/common/api/news.dart';
+export 'package:healthy_diet_housekeeper/common/api/food.dart';
 
 // modules
-export 'package:healthy_diet_housekeeper/models/user.dart';
 export 'package:healthy_diet_housekeeper/models/sms.dart' hide Data;
 export 'package:healthy_diet_housekeeper/models/login.dart' hide Data;
 export 'package:healthy_diet_housekeeper/models/news_list.dart' hide Data;
@@ -47,10 +49,12 @@ export 'package:healthy_diet_housekeeper/pages/widgets/bottom_sheet_content.dart
 export 'package:healthy_diet_housekeeper/pages/widgets/custom_nine_gridview.dart';
 export 'package:healthy_diet_housekeeper/pages/widgets/load_network_image.dart';
 export 'package:healthy_diet_housekeeper/pages/widgets/toast.dart';
+export 'package:healthy_diet_housekeeper/pages/widgets/app_bar_search.dart';
 export 'package:healthy_diet_housekeeper/pages/food/custom_search_delegate.dart';
 export 'package:healthy_diet_housekeeper/pages/food/food_group_panel.dart';
 export 'package:healthy_diet_housekeeper/pages/food/food_item.dart';
 export 'package:healthy_diet_housekeeper/pages/food/custom_card.dart';
+export 'package:healthy_diet_housekeeper/pages/food/food_search_page.dart';
 export 'package:healthy_diet_housekeeper/pages/home/record_food_button.dart';
 export 'package:healthy_diet_housekeeper/pages/home/show_calorie.dart';
 export 'package:healthy_diet_housekeeper/pages/home/show_macronutrient.dart';

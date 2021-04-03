@@ -21,62 +21,57 @@ class _NewsPageState extends State<NewsPage> {
     return RefreshIndicator(
       color: Theme.of(context).primaryColor,
       onRefresh: _refreshData,
-      child: ScrollConfiguration(
-        behavior: ScrollBehavior(),
-        child: GlowingOverscrollIndicator(
-          color: Theme.of(context).primaryColor,
-          axisDirection: AxisDirection.down,
-          child: _newsList == null
-              ? Center(
-                  child: CircularProgressIndicator(
-                    valueColor: new AlwaysStoppedAnimation<Color>(
-                      Theme.of(context).primaryColor,
-                    ),
+      child: MyScrollConfiguration(
+        child: _newsList == null
+            ? Center(
+                child: CircularProgressIndicator(
+                  valueColor: new AlwaysStoppedAnimation<Color>(
+                    Theme.of(context).primaryColor,
                   ),
-                )
-              : ListView.builder(
-                  controller: _scrollController,
-                  physics: ClampingScrollPhysics(),
-                  itemCount: _newsList.length,
-                  itemBuilder: (context, index) {
-                    // 如果是第一个widget添加顶部padding
-                    if (index == 0) {
-                      return Padding(
-                        padding: EdgeInsets.only(top: 8.px),
-                        child: NewsItem(_newsList[index]),
-                      );
-                    }
-                    // 如果是最后一个widget，则在后面额外添加一个loading
-                    if (index == _newsList.length - 1) {
-                      return Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            NewsItem(_newsList[index]),
-                            Center(
-                              child: () {
-                                return _loadingFlag
-                                    ? Container(
-                                        height: 24.px,
-                                        child: SpinKitThreeBounce(
-                                          color: Theme.of(context).primaryColor,
-                                          size: 24.px,
-                                        ),
-                                      )
-                                    : Container(
-                                        height: 24.px,
-                                      );
-                              }(),
-                            ),
-                          ],
-                        ),
-                      );
-                    } else {
-                      return NewsItem(_newsList[index]);
-                    }
-                  },
                 ),
-        ),
+              )
+            : ListView.builder(
+                controller: _scrollController,
+                physics: ClampingScrollPhysics(),
+                itemCount: _newsList.length,
+                itemBuilder: (context, index) {
+                  // 如果是第一个widget添加顶部padding
+                  if (index == 0) {
+                    return Padding(
+                      padding: EdgeInsets.only(top: 8.px),
+                      child: NewsItem(_newsList[index]),
+                    );
+                  }
+                  // 如果是最后一个widget，则在后面额外添加一个loading
+                  if (index == _newsList.length - 1) {
+                    return Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          NewsItem(_newsList[index]),
+                          Center(
+                            child: () {
+                              return _loadingFlag
+                                  ? Container(
+                                      height: 24.px,
+                                      child: SpinKitThreeBounce(
+                                        color: Theme.of(context).primaryColor,
+                                        size: 24.px,
+                                      ),
+                                    )
+                                  : Container(
+                                      height: 24.px,
+                                    );
+                            }(),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return NewsItem(_newsList[index]);
+                  }
+                },
+              ),
       ),
     );
   }

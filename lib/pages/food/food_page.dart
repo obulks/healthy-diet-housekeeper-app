@@ -12,6 +12,7 @@ class _FoodPageState extends State<FoodPage> {
     SizeFit.initialize(context);
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Text(
           '食物成分查询',
           style: TextStyle(
@@ -20,37 +21,39 @@ class _FoodPageState extends State<FoodPage> {
           ),
         ),
         actions: [
-          IconButton(
-            icon: Icon(
-              Icons.search,
-              color: Colors.white,
-              size: 30.px,
+          Padding(
+            padding: EdgeInsets.only(right: 16.px),
+            child: GestureDetector(
+              child: Icon(
+                Icons.search,
+                size: 28.px,
+                color: Colors.white,
+              ),
+              onTap: _toSearchPage,
             ),
-            onPressed: () {
-              showSearch(
-                context: context,
-                delegate: CustomSearchDelegate(),
-              );
-            },
-          ),
+          )
         ],
       ),
-      body: ScrollConfiguration(
-        behavior: ScrollBehavior(),
-        child: GlowingOverscrollIndicator(
-          color: Theme.of(context).primaryColor,
-          axisDirection: AxisDirection.down,
-          child: SingleChildScrollView(
-            physics: ClampingScrollPhysics(),
-            child: Container(
-              child: Column(
-                children: <Widget>[
-                  FoodGroupPanel(),
-                ],
-              ),
+      body: MyScrollConfiguration(
+        child: SingleChildScrollView(
+          physics: ClampingScrollPhysics(),
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                FoodGroupPanel(),
+              ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  _toSearchPage() {
+    Navigator.push(
+      context,
+      FadeRoute(
+        page: FoodSearchPage(),
       ),
     );
   }

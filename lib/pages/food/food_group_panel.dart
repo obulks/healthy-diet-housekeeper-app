@@ -153,7 +153,7 @@ class FoodGroupPanel extends StatelessWidget {
   _toFoodListPage(BuildContext context, String title, String foodType) {
     Navigator.push(
       context,
-      MaterialPageRoute(
+      CupertinoPageRoute(
         builder: (context) => FoodListPage(
           foodType: foodType,
           title: title,

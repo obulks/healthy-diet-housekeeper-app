@@ -83,7 +83,7 @@ class NewsItem extends StatelessWidget {
   _toNewsDetailPage(BuildContext context, String uniquekey) {
     Navigator.push(
       context,
-      MaterialPageRoute(
+      CupertinoPageRoute(
         builder: (context) => NewsDetailPage(
           uniquekey: uniquekey,
         ),

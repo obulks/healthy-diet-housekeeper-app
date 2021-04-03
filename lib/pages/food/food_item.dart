@@ -75,7 +75,7 @@ class FoodItem extends StatelessWidget {
   _toFoodDetail(BuildContext context, Foods food) {
     Navigator.push(
       context,
-      MaterialPageRoute(
+      CupertinoPageRoute(
         builder: (context) => FoodDetailPage(food: food),
       ),
     );

@@ -64,8 +64,13 @@ class _MePageState extends State<MePage> {
                 color: Colors.white,
               ),
               onTap: () {
-                Navigator.pushNamed(context, '/demo');
                 print('message tap');
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => Demo(),
+                  ),
+                );
               },
             ),
           ),
