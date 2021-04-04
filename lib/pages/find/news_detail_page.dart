@@ -51,7 +51,6 @@ class _NewsDetailPageState extends State<NewsDetailPage> {
                     ),
                   );
                 }
-                print(snap.data.data.detail);
                 return Container(
                   child: Html(
                     data: '''

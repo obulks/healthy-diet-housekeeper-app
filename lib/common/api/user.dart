@@ -1,7 +1,7 @@
 import 'package:healthy_diet_housekeeper/public.dart';
 
 class UserApi {
-  static final String _baseUrl = 'http://192.168.1.101:3000/users';
+  static final String _baseUrl = '${Api.baseUrl}/users';
 
   static Future<Login> login(String phone, String code) async {
     Dio dio = new Dio();

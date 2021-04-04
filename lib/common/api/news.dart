@@ -1,7 +1,7 @@
 import 'package:healthy_diet_housekeeper/public.dart';
 
 class NewsApi {
-  static final String _baseUrl = 'http://192.168.1.101:3000/news';
+  static final String _baseUrl = '${Api.baseUrl}/news';
 
   static Future<NewsList> getNewsList(int page, int pageSize) {
     Dio dio = new Dio();
@@ -11,7 +11,7 @@ class NewsApi {
       'page_size': pageSize,
     };
 
-    return dio.get('$_baseUrl/', queryParameters: query).then((response) {
+    return dio.get('$_baseUrl', queryParameters: query).then((response) {
       return NewsList.fromJson(response.data);
     }).catchError((err) {
       print('dio error: $err');

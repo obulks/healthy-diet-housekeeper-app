@@ -1,7 +1,7 @@
 import 'package:healthy_diet_housekeeper/public.dart';
 
 class FoodApi {
-  static final String _baseUrl = 'http://192.168.1.101:3000/foods';
+  static String _baseUrl = '${Api.baseUrl}/foods';
 
   static Future<FoodList> getFoodList(String word, int page) {
     Dio dio = new Dio();

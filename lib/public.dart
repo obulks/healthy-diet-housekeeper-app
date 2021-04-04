@@ -20,6 +20,7 @@ export 'package:healthy_diet_housekeeper/common/api/user.dart';
 export 'package:healthy_diet_housekeeper/common/api/sms.dart';
 export 'package:healthy_diet_housekeeper/common/api/news.dart';
 export 'package:healthy_diet_housekeeper/common/api/food.dart';
+export 'package:healthy_diet_housekeeper/common/api/base_url.dart';
 
 // modules
 export 'package:healthy_diet_housekeeper/models/sms.dart' hide Data;
