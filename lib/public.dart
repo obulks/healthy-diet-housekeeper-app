@@ -33,6 +33,7 @@ export 'package:healthy_diet_housekeeper/models/food_list.dart' hide Data;
 // pages
 export 'package:healthy_diet_housekeeper/pages/app_home_screen.dart';
 export 'package:healthy_diet_housekeeper/pages/home/home_page.dart';
+export 'package:healthy_diet_housekeeper/pages/home/record_food_page.dart';
 export 'package:healthy_diet_housekeeper/pages/food/food_page.dart';
 export 'package:healthy_diet_housekeeper/pages/food/food_list_page.dart';
 export 'package:healthy_diet_housekeeper/pages/food/food_detail_page.dart';
@@ -51,14 +52,18 @@ export 'package:healthy_diet_housekeeper/pages/widgets/custom_nine_gridview.dart
 export 'package:healthy_diet_housekeeper/pages/widgets/load_network_image.dart';
 export 'package:healthy_diet_housekeeper/pages/widgets/toast.dart';
 export 'package:healthy_diet_housekeeper/pages/widgets/app_bar_search.dart';
+export 'package:healthy_diet_housekeeper/pages/widgets/search_bar.dart';
 export 'package:healthy_diet_housekeeper/pages/food/custom_search_delegate.dart';
 export 'package:healthy_diet_housekeeper/pages/food/food_group_panel.dart';
 export 'package:healthy_diet_housekeeper/pages/food/food_item.dart';
 export 'package:healthy_diet_housekeeper/pages/food/custom_card.dart';
 export 'package:healthy_diet_housekeeper/pages/food/food_search_page.dart';
+export 'package:healthy_diet_housekeeper/pages/food/search_item.dart';
 export 'package:healthy_diet_housekeeper/pages/home/record_food_button.dart';
 export 'package:healthy_diet_housekeeper/pages/home/show_calorie.dart';
 export 'package:healthy_diet_housekeeper/pages/home/show_macronutrient.dart';
+export 'package:healthy_diet_housekeeper/pages/home/record_search_item.dart';
+export 'package:healthy_diet_housekeeper/pages/home/record_panel.dart';
 export 'package:healthy_diet_housekeeper/pages/login/authcode_button.dart';
 export 'package:healthy_diet_housekeeper/pages/find/post_card.dart';
 export 'package:healthy_diet_housekeeper/pages/find/news_item.dart';

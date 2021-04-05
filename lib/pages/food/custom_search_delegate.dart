@@ -87,7 +87,7 @@ class CustomSearchDelegate extends SearchDelegate<String> {
   }
 }
 
-class SearchBar extends StatelessWidget {
+class _SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeFit.initialize(context);

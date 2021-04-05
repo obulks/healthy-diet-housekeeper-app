@@ -6,11 +6,13 @@ class RecordFoodButton extends StatelessWidget {
   final String title;
   final String subTitle;
   final Widget icon;
+  final Widget tailIcon;
 
   RecordFoodButton({
     this.title,
     this.subTitle,
     this.icon,
+    this.tailIcon,
     @required this.onTap,
   });
 
@@ -41,43 +43,56 @@ class RecordFoodButton extends StatelessWidget {
         child: Container(
           color: Colors.transparent,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: 40.px,
-                height: 40.px,
-                margin: EdgeInsets.only(left: 16.px),
-                // decoration: BoxDecoration(
-                //   color: Color(0xffFCD8D8),
-                //   borderRadius: BorderRadius.all(Radius.circular(20.px)),
-                // ),
-                child: icon,
-              ),
-              SizedBox(width: 24.px),
-              Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '$title',
-                      style: TextStyle(
-                        fontSize: 13.px,
-                        fontWeight: FontWeight.w500,
-                      ),
+              Row(
+                children: [
+                  Container(
+                    width: 40.px,
+                    height: 40.px,
+                    margin: EdgeInsets.only(left: 16.px),
+                    child: icon,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 16.px),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '$title',
+                          style: TextStyle(
+                            fontSize: 13.px,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(height: 4.px),
+                        Text(
+                          '$subTitle',
+                          style: TextStyle(
+                            fontSize: 12.px,
+                            color: Color(0xff999999),
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(height: 4.px),
-                    Text(
-                      '$subTitle',
-                      style: TextStyle(
-                        fontSize: 12.px,
-                        color: Color(0xff999999),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              SizedBox(width: 112.px),
-              Icon(Icons.add),
+              Row(
+                children: [
+                  Container(
+                    child: tailIcon ??
+                        Icon(
+                          Icons.add,
+                          color: Colors.black54,
+                        ),
+                    margin: EdgeInsets.only(
+                      right: 16.px,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

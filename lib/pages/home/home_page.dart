@@ -21,6 +21,7 @@ class _HomePageState extends State<HomePage> {
       Image.asset('assets/icons/lunch.png', width: 32.px, height: 32.px),
       Image.asset('assets/icons/dinner.png', width: 32.px, height: 32.px),
       Image.asset('assets/icons/snack2.png', width: 32.px, height: 32.px),
+      Image.asset('assets/icons/order.png', width: 24.px, height: 24.px),
     ];
     _referenceCalorie = 1980;
     _intakeCalorie = 1593;
@@ -60,7 +61,6 @@ class _HomePageState extends State<HomePage> {
       ),
       body: MyScrollConfiguration(
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
           child: Container(
             color: Color(0xffF7F8F9),
             child: Column(
@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                   width: 345.px,
                   height: 210.px,
                   margin: EdgeInsets.only(
-                    top: 24.px,
+                    top: 16.px,
                     right: 16.px,
                     left: 16.px,
                   ),
@@ -194,15 +194,15 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 20.px,
-                ),
+                // SizedBox(
+                //   height: 16.px,
+                // ),
                 RecordFoodButton(
                   icon: _buttonIcons[0],
                   title: '早餐',
                   subTitle: '建议不超过432千卡',
                   onTap: () {
-                    print('早餐');
+                    _toRecordFoodPage('早餐');
                   },
                 ),
                 RecordFoodButton(
@@ -224,7 +224,20 @@ class _HomePageState extends State<HomePage> {
                 RecordFoodButton(
                   icon: _buttonIcons[3],
                   title: '加餐',
-                  subTitle: '建议不超过432千卡',
+                  subTitle: '建议不超过112千卡',
+                  onTap: () {
+                    print('加餐');
+                  },
+                ),
+                RecordFoodButton(
+                  icon: _buttonIcons[4],
+                  title: '查看今日饮食',
+                  subTitle: '共${_intakeCalorie.toStringAsFixed(0)}千卡',
+                  tailIcon: Icon(
+                    Icons.keyboard_arrow_right,
+                    color: Colors.black54,
+                    size: 28.px,
+                  ),
                   onTap: () {
                     print('加餐');
                   },
@@ -235,6 +248,15 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ), // 构建主页面
+    );
+  }
+
+  _toRecordFoodPage(String title) {
+    Navigator.push(
+      context,
+      FadeRoute(
+        page: RecordFoodPage(title: title),
+      ),
     );
   }
 }

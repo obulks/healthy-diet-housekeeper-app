@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:healthy_diet_housekeeper/pages/food/search_item.dart';
 import 'package:healthy_diet_housekeeper/public.dart';
 
 class FoodSearchPage extends StatefulWidget {
@@ -102,7 +101,6 @@ class _FoodSearchPageState extends State<FoodSearchPage> {
     print('fetch');
     FoodList foodListResult = await FoodApi.searchFood(word);
     if (foodListResult.code == 200) {
-      print(foodListResult.data.foods[0].toJson());
       setState(() {
         _foodList = foodListResult.data.foods;
       });
